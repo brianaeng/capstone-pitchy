@@ -1,0 +1,68 @@
+/* -- GENERAL - BASE.HTML -- */
+body {
+  padding: 2rem 0 0 2rem;
+  width: 85%;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.page-header {
+  margin: 2rem;
+  height: 4rem;
+}
+
+.page-header * {
+  display: inline;
+  vertical-align: middle;
+}
+
+#site-nav {
+  float: left;
+}
+
+#other-nav {
+  float: right;
+}
+
+#other-nav a {
+  margin: 1rem;
+  font-size: 2rem;
+}
+
+/* -- GENERAL ALERTS -- */
+.alert {
+    display: block;
+    padding: 20px;
+    border-left: 5px solid;
+}
+
+.alert-success {
+    background-color: #D5F5E3;
+    border-left-color: #2ECC71;
+    color: #2ECC71;
+}
+
+.alert-info {
+    background-color: #D6EAF8;
+    border-left-color: #3498DB;
+    color: #3498DB;
+}
+
+.alert-warning {
+    background-color: #FCF3CF;
+    border-left-color: #F1C40F;
+    color: #F1C40F;
+}
+
+.alert-error {
+    background-color: #F2D7D5;
+    border-left-color: #C0392B;
+    color: #C0392B;
+
+/* -- HOMEPAGE.HTML -- */
+.homepage-content {
+  text-align: center;
+}

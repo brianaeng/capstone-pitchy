@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Welcome, {{ user.username }}</h1>
+  <h1>This is the hub page.</h1>
+  <h3>Your friends:</h3>
+  <ul>
+    {% for row in friends %}
+      <li>
+        {% if row.friend != user %}
+          {{ row.friend.username }}
+        {% elif row.user != user %}
+          {{ row.user.username }}
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h3>Your friend requests:</h3>
+  <ul>
+    {% for row in friend_requests %}
+      <li>
+        {{ row.user.username }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}
