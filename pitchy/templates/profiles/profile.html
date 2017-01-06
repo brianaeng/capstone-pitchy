@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>You're on a user page</h1>
+<h1>{{ profile.user.username }}</h1>
+<ul>
+  <li>
+    {{ profile.user.first_name }} {{ profile.user.last_name }}
+  </li>
+  <li>
+    {{ role }} @ {{ profile.company }}
+  </li>
+  <li>
+    {{ profile.user.email }}
+  </li>
+  <li>
+    {{ profile.bio }}
+  </li>
+  <li>
+    {{ profile.social_handle }}
+  </li>
+  <li>
+    {% for item in focuses %}
+    <li>
+      {{ item.name }}
+    </li>
+    {% endfor %}
+  </li>
+</ul>
+{% endblock content %}

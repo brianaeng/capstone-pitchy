@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile, Friendship, Focus
 from forms import UserForm, ProfileForm
 from django.contrib import messages
@@ -6,6 +6,18 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, FormView
 from django.db.models import Q
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'profiles/profile.html'
+    def get(self, request, pk):
+        profile = get_object_or_404(Profile, pk=pk)
+        focuses = profile.focuses.values_list('name', flat=True)
+
+        if profile.is_pr:
+            role = "Public Relations"
+        else:
+            role = "Journalist"
+        return render(request, self.template_name, {'profile': profile, 'role': role, 'focuses': focuses})
 
 class UpdateProfileView(LoginRequiredMixin, FormView):
     template_name = 'profiles/update_profile.html'
