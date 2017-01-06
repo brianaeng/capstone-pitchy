@@ -18,8 +18,7 @@ class Profile(models.Model):
     social_handle = models.CharField(max_length=20, blank=True)
     company = models.CharField(max_length=50, blank=True)
     focuses = models.ManyToManyField(Focus)
-    is_pr = models.BooleanField(default=False)
-    is_journo = models.BooleanField(default=False)
+    role = models.CharField(max_length=30, choices=(("PR", "Public Relations Professional"), ("JOURNO", "Journalist")))
 
     def __str__(self):
         return self.user.username

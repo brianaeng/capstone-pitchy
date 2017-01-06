@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('bio', 'social_handle', 'company', 'focuses')
+        fields = ('bio', 'social_handle', 'company', 'focuses', 'role')
 
 class FocusForm(forms.ModelForm):
     class Meta:
@@ -20,7 +20,9 @@ class FocusForm(forms.ModelForm):
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
 
     class Meta:
         model = User
-        fields = ("username", "email", "password1", "password2")
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")

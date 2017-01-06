@@ -22,7 +22,7 @@ class SignUpView(FormView):
             messages.success(request, ('Your account was successfully created!'))
             new_user = authenticate(username=signup_form.cleaned_data['username'], password=signup_form.cleaned_data['password1'],)
             login(request, new_user)
-            return redirect('/hub')
+            return redirect('/profile/edit')
         else:
             messages.error(request, ('Please correct the error below.'))
             return render(request, self.template_name, {'signup_form': signup_form})
@@ -33,7 +33,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         profile = get_object_or_404(Profile, pk=pk)
         # focuses = profile.focuses.values_list('name', flat=True)
 
-        if profile.is_pr:
+        if profile.role == "PR":
             role = "Public Relations"
         else:
             role = "Journalist"
@@ -60,6 +60,10 @@ class UpdateProfileView(LoginRequiredMixin, FormView):
             return redirect('/')
         else:
             messages.error(request, ('Please correct the error below.'))
+            return render(request, self.template_name, {
+                'user_form': user_form,
+                'profile_form': profile_form
+            })
 
 class HomepageView(TemplateView):
     template_name = 'homepage.html'
