@@ -1,11 +1,31 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Profile, Friendship, Focus
-from forms import UserForm, ProfileForm
+from .models import Profile, Friendship, Focus, User
+from forms import UserForm, ProfileForm, SignUpForm
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+# from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, FormView
 from django.db.models import Q
+from django.contrib.auth import authenticate, login
+
+class SignUpView(FormView):
+    template_name = 'registration/signup.html'
+
+    def get(self, request):
+        signup_form = SignUpForm()
+        return render(request, self.template_name, {'signup_form': signup_form})
+
+    def post(self, request):
+        signup_form = SignUpForm(request.POST)
+        if signup_form.is_valid():
+            signup_form.save()
+            messages.success(request, ('Your account was successfully created!'))
+            new_user = authenticate(username=signup_form.cleaned_data['username'], password=signup_form.cleaned_data['password1'],)
+            login(request, new_user)
+            return redirect('/hub')
+        else:
+            messages.error(request, ('Please correct the error below.'))
+            return render(request, self.template_name, {'signup_form': signup_form})
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html'

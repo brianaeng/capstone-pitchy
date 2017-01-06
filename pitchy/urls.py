@@ -1,7 +1,11 @@
 from django.conf.urls import url
 from . import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    url(r'^login/$', auth_views.login, {'template_name': 'registration/login.html'}, name='login'),
+    url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
+    url(r'^signup/$', views.SignUpView.as_view(), name='signup'),
     url(r'^$', views.HomepageView.as_view(), name='homepage'),
     url(r'^profile/edit/$', views.UpdateProfileView.as_view(), name='update_profile'),
     url(r'^hub/$', views.HubView.as_view(), name='hub'),
