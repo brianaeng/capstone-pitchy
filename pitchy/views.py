@@ -11,13 +11,13 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html'
     def get(self, request, pk):
         profile = get_object_or_404(Profile, pk=pk)
-        focuses = profile.focuses.values_list('name', flat=True)
+        # focuses = profile.focuses.values_list('name', flat=True)
 
         if profile.is_pr:
             role = "Public Relations"
         else:
             role = "Journalist"
-        return render(request, self.template_name, {'profile': profile, 'role': role, 'focuses': focuses})
+        return render(request, self.template_name, {'profile': profile, 'role': role})
 
 class UpdateProfileView(LoginRequiredMixin, FormView):
     template_name = 'profiles/update_profile.html'

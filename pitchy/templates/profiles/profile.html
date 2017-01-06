@@ -20,7 +20,7 @@
     {{ profile.social_handle }}
   </li>
   <li>
-    {% for item in focuses %}
+    {% for item in profile.focuses.all %}
     <li>
       {{ item.name }}
     </li>
