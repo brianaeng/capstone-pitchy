@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <ul>
+    {% for conversation in conversations %}
+      <li>
+        {{ conversation }}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <ul>
+    {% for item in messages %}
+      <li>
+        {{ item }}
+      </li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}

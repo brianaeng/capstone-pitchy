@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Profile, Friendship, Focus, User
+from .models import Profile, Friendship, Focus, User, Conversation, DirectMessage
 from forms import UserForm, ProfileForm, SignUpForm
 from django.contrib import messages
 # from django.contrib.auth.forms import AuthenticationForm
@@ -78,3 +78,12 @@ class HubView(LoginRequiredMixin, TemplateView):
         friends = Friendship.objects.exclude(confirmed=False).filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
         friend_requests = Friendship.objects.all().filter(friend_id=request.user.id, confirmed=False)
         return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests })
+
+class ConversationView(LoginRequiredMixin, TemplateView):
+    template_name = 'messaging/conversations.html'
+
+    def get(self, request, pk):
+        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+        selected_convo = Conversation.objects.get(pk=pk)
+        messages = DirectMessage.objects.filter(conversation_id=selected_convo.id)
+        return render(request, self.template_name, {'conversations': conversations, 'messages': messages})
