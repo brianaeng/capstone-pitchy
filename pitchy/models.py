@@ -42,3 +42,24 @@ class Friendship(models.Model):
     def __str__(self):
         output = "{} requested {} - confirmation: {}".format(self.user, self.friend, self.confirmed)
         return output
+
+class Conversation(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    user1 = models.ForeignKey(User, related_name="user_one")
+    user2 = models.ForeignKey(User, related_name="user_two")
+
+    def __str__(self):
+        output = "{} & {} convo".format(self.user1, self.user2)
+        return output
+
+class DirectMessage(models.Model):
+    #add a read_at?
+    sent_at = models.DateTimeField(auto_now_add=True)
+    conversation = models.ForeignKey(Conversation, related_name="messages")
+    sender = models.ForeignKey(User, related_name="message_sender")
+    body = models.TextField()
+    # attachment = models.FileField(blank=True, )
+
+    def __str__(self):
+        output = "{}: {}".format(self.sender, self.body)
+        return output
