@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'', include('pitchy.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^api/pitchy/', include('pitchy.api.urls', namespace="pitchy-api")),
 ]
