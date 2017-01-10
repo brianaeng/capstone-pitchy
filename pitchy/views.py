@@ -76,10 +76,12 @@ class HomepageView(TemplateView):
     template_name = 'homepage.html'
 
     def get(self, request):
+        if request.user.is_authenticated():
+            return redirect('connections')
         return render(request, self.template_name, {})
 
-class HubView(LoginRequiredMixin, TemplateView):
-    template_name = 'hub.html'
+class ConnectionsView(LoginRequiredMixin, TemplateView):
+    template_name = 'connections.html'
 
     def get(self, request):
         friends = Friendship.objects.exclude(confirmed=False).filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
@@ -99,7 +101,7 @@ def confirm_friend(request, pk):
     friendship = Friendship.objects.get(pk=pk)
     friendship.confirmed = True
     friendship.save()
-    return redirect('hub')
+    return redirect('connections')
 
 def request_friend(request, pk):
     person = User.objects.get(pk=pk)
