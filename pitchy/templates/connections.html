@@ -27,4 +27,15 @@
       </li>
     {% endfor %}
   </ul>
+
+  <h3>Recommendations</h3>
+  <ul>
+    {% for person in recommendations %}
+      {% if person.id != request.user.profile.id %}
+        <li>
+          {{ person.user.username }}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 {% endblock content %}
