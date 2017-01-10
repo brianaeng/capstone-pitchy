@@ -8,7 +8,6 @@ from django.views.generic import TemplateView, FormView
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
 
 class SignUpView(FormView):
     template_name = 'registration/signup.html'
