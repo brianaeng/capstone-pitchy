@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, FormView
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect, HttpResponse
+from django.urls import reverse
 
 class SignUpView(FormView):
     template_name = 'registration/signup.html'
@@ -87,3 +89,9 @@ class ConversationView(LoginRequiredMixin, TemplateView):
         selected_convo = Conversation.objects.get(pk=pk)
         messages = DirectMessage.objects.filter(conversation_id=selected_convo.id)
         return render(request, self.template_name, {'conversations': conversations, 'messages': messages})
+
+def confirm_friend(request, pk):
+    friendship = get_object_or_404(Friendship, pk=pk)
+    friendship.confirmed = True
+    friendship.save()
+    return redirect('homepage')
