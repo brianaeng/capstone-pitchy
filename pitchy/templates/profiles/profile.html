@@ -12,6 +12,11 @@
     <input type="submit" value="Request Friend" />
   </form>
 {% endif %}
+<div>
+  {% if profile.pic %}
+  <img src="{{ profile.pic.url }}"></img>
+  {% endif %}
+</div>
 <ul>
   <li>
     {{ profile.user.first_name }} {{ profile.user.last_name }}
