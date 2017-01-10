@@ -8,7 +8,6 @@ from django.views.generic import TemplateView, FormView
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
 
 class SignUpView(FormView):
     template_name = 'registration/signup.html'
@@ -60,7 +59,7 @@ class UpdateProfileView(LoginRequiredMixin, FormView):
 
     def post(self, request):
         user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -77,10 +76,12 @@ class HomepageView(TemplateView):
     template_name = 'homepage.html'
 
     def get(self, request):
+        if request.user.is_authenticated():
+            return redirect('connections')
         return render(request, self.template_name, {})
 
-class HubView(LoginRequiredMixin, TemplateView):
-    template_name = 'hub.html'
+class ConnectionsView(LoginRequiredMixin, TemplateView):
+    template_name = 'connections.html'
 
     def get(self, request):
         friends = Friendship.objects.exclude(confirmed=False).filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
@@ -100,7 +101,7 @@ def confirm_friend(request, pk):
     friendship = Friendship.objects.get(pk=pk)
     friendship.confirmed = True
     friendship.save()
-    return redirect('hub')
+    return redirect('connections')
 
 def request_friend(request, pk):
     person = User.objects.get(pk=pk)

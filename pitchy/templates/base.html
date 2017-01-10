@@ -19,7 +19,7 @@
       <h2 id="site-nav"><a href="/">Pitchy</a></h2>
       <nav id="other-nav">
         {% if request.user.is_authenticated %}
-          <a href="/hub">Hub</a>
+          <a href="/connections">Connections</a>
           <a href="/messages">Messages</a>
           <a href="{% url 'update_profile' %}">Profile</a>
           <a href="/logout">Sign Out</a>
