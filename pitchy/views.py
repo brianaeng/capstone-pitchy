@@ -33,13 +33,19 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html'
     def get(self, request, pk):
         profile = get_object_or_404(Profile, pk=pk)
-        # focuses = profile.focuses.values_list('name', flat=True)
+        current_user_friends = Friendship.objects.filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
+        boolean = False
+        for friendship in current_user_friends:
+            if friendship.user == profile.user or friendship.friend == profile.user:
+                boolean = True
+                break
 
         if profile.role == "PR":
             role = "Public Relations"
         else:
             role = "Journalist"
-        return render(request, self.template_name, {'profile': profile, 'role': role})
+
+        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean})
 
 class UpdateProfileView(LoginRequiredMixin, FormView):
     template_name = 'profiles/update_profile.html'
@@ -95,3 +101,8 @@ def confirm_friend(request, pk):
     friendship.confirmed = True
     friendship.save()
     return redirect('hub')
+
+def request_friend(request, pk):
+    person = User.objects.get(pk=pk)
+    Friendship.objects.create(user=request.user, friend=person, confirmed=False)
+    return redirect('profile', pk=pk)
