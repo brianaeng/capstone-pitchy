@@ -21,9 +21,9 @@
     {% for row in friend_requests %}
       <li>
         {{ row.user.username }}
-        <button type="button">
-          <a href="{% url 'confirmation' pk=row.pk %}">Confirm</a>
-        </button>
+        <form action="{% url 'confirmation' pk=row.pk %}">
+          <input type="submit" value="Accept Request" />
+        </form>
       </li>
     {% endfor %}
   </ul>

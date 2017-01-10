@@ -91,7 +91,7 @@ class ConversationView(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, {'conversations': conversations, 'messages': messages})
 
 def confirm_friend(request, pk):
-    friendship = get_object_or_404(Friendship, pk=pk)
+    friendship = Friendship.objects.get(pk=pk)
     friendship.confirmed = True
     friendship.save()
-    return redirect('homepage')
+    return redirect('hub')
