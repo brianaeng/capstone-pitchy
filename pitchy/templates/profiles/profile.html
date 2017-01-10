@@ -3,6 +3,15 @@
 {% block content %}
 <h1>You're on a user page</h1>
 <h1>{{ profile.user.username }}</h1>
+{% if boolean %}
+  <p>
+    ur frands already
+  </p>
+{% else %}
+  <form action="{% url 'request_friend' pk=profile.user.pk %}">
+    <input type="submit" value="Request Friend" />
+  </form>
+{% endif %}
 <ul>
   <li>
     {{ profile.user.first_name }} {{ profile.user.last_name }}
