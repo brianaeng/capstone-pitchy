@@ -8,6 +8,7 @@ from django.views.generic import TemplateView, FormView
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
+import random
 
 class SignUpView(FormView):
     template_name = 'registration/signup.html'
@@ -84,9 +85,22 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
     template_name = 'connections.html'
 
     def get(self, request):
-        friends = Friendship.objects.exclude(confirmed=False).filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
+        pending_and_confirmed_friends = Friendship.objects.filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
+        friends = pending_and_confirmed_friends.exclude(confirmed=False)
         friend_requests = Friendship.objects.all().filter(friend_id=request.user.id, confirmed=False)
-        return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests })
+
+        user_profile = Profile.objects.get(user_id=request.user.id)
+        if user_profile.focuses.all():
+            #get all of user's focuses
+            user_focuses = user_profile.focuses.all()
+            #picked focus
+            focus = random.choice(user_focuses)
+            users = focus.profile_set.all()
+            recommendations = list(set(users) - set(pending_and_confirmed_friends))
+        else:
+            recommendations = []
+
+        return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests, 'recommendations': recommendations })
 
 class ConversationView(LoginRequiredMixin, TemplateView):
     template_name = 'messaging/conversations.html'
