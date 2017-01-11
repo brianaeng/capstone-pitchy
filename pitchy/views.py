@@ -121,3 +121,13 @@ def request_friend(request, pk):
     person = User.objects.get(pk=pk)
     Friendship.objects.create(user=request.user, friend=person, confirmed=False)
     return redirect('profile', pk=pk)
+
+def search(request):
+    if request.method == 'POST':
+        search_text = request.POST['search_text']
+    else:
+        search_text = ''
+
+    users = User.objects.filter(Q(first_name__contains=search_text) | Q(last_name__contains=search_text))
+
+    return render(request, 'profiles/search.html', {'users': users})

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>You're on the search page</h1>
+{% if users.count > 0 %}
+  {% for user in users %}
+    {{ user.username }}
+  {% endfor %}
+{% else %}
+  <p>
+    None found, sorry!
+  </p>
+{% endif %}
+
+{% endblock content %}
