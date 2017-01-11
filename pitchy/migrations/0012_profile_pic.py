@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pitchy', '0011_auto_20170106_1512'),
+        ('pitchy', '0008_conversation_directmessage'),
     ]
 
     operations = [
