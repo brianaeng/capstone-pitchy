@@ -29,13 +29,19 @@
   </ul>
 
   <h3>Recommendations</h3>
-  <ul>
-    {% for person in recommendations %}
-      {% if person.id != request.user.profile.id %}
-        <li>
-          <a href="{% url 'profile' pk=person.id %}">{{ person.user.username }}</a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+  {% if not recommendations %}
+    <p>
+      Sorry, no recommendations.
+    </p>
+  {% else %}
+    <ul>
+      {% for person in recommendations %}
+        {% if person.id != request.user.profile.id %}
+          <li>
+            <a href="{% url 'profile' pk=person.id %}">{{ person.user.username }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  {% endif %}
 {% endblock content %}

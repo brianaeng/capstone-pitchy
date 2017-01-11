@@ -95,7 +95,7 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
             user_focuses = user_profile.focuses.all()
             #picked focus
             focus = random.choice(user_focuses)
-            users = focus.profile_set.all()
+            users = focus.profile_set.all().exclude(id=user_profile.id)
             recommendations = list(set(users) - set(pending_and_confirmed_friends))
         else:
             recommendations = []
