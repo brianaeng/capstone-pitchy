@@ -1,0 +1,13 @@
+
+{% block content %}
+{% if users.count > 0 %}
+  {% for user in users %}
+    <a href="{% url 'profile' pk=user.profile.pk %}">{{ user.username }}</a>
+  {% endfor %}
+{% else %}
+  <p>
+    None found, sorry!
+  </p>
+{% endif %}
+
+{% endblock content %}
