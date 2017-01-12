@@ -85,22 +85,43 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
     template_name = 'connections.html'
 
     def get(self, request):
+        #Pending and comfirmed friendships for current user
         pending_and_confirmed_friends = Friendship.objects.filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
-        friends = pending_and_confirmed_friends.exclude(confirmed=False)
-        friend_requests = Friendship.objects.all().filter(friend_id=request.user.id, confirmed=False)
 
+        #Profiles of pending/confirmed friends for current user
+        profiles = []
+
+        for friendship in pending_and_confirmed_friends:
+            if friendship.user != request.user:
+                profiles.append(friendship.user.profile)
+            else:
+                profiles.append(friendship.friend.profile)
+
+        #Confirmed friends for current user
+        friends = pending_and_confirmed_friends.exclude(confirmed=False)
+
+        #Pending friend requests for current user
+        friend_requests = Friendship.objects.filter(friend_id=request.user.id, confirmed=False)
+
+        #Current user profile
         user_profile = Profile.objects.get(user_id=request.user.id)
+
         if user_profile.focuses.all():
-            #get all of user's focuses
+            #All of current user's focuses
             user_focuses = user_profile.focuses.all()
-            #picked focus
+
+            #Randomly choose a focus
             focus = random.choice(user_focuses)
+
+            #Users with chosen focus (excluding current user)
             users = focus.profile_set.all().exclude(id=user_profile.id)
-            recommendations = list(set(users) - set(pending_and_confirmed_friends))
+
+            #Cross reference focus users with current user's friends
+            recommendations = list(set(users) - set(profiles))
         else:
             recommendations = []
 
-        return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests, 'recommendations': recommendations })
+        return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests, 'recommendations': recommendations})
 
 class ConversationView(LoginRequiredMixin, TemplateView):
     template_name = 'messaging/conversations.html'
@@ -124,10 +145,10 @@ def request_friend(request, pk):
 
 def search(request):
     if request.method == 'POST':
-        search_text = request.POST['search_text']
+        search_text = request.POST['search_text'].lower()
     else:
         search_text = ''
 
-    users = User.objects.filter(Q(first_name__contains=search_text) | Q(last_name__contains=search_text))
+    users = User.objects.filter(Q(first_name__icontains=search_text) | Q(last_name__icontains=search_text))
 
     return render(request, 'profiles/search.html', {'users': users})
