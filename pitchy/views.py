@@ -177,7 +177,7 @@ def chat_room(request, label):
     room, created = Conversation.objects.get_or_create(label=label)
 
     # We want to show the last 50 messages, ordered most-recent-last
-    messages = reversed(room.messages.order_by('-timestamp')[:50])
+    messages = reversed(room.messages.order_by('-sent_at')[:50])
 
     return render(request, "chat/room.html", {
         'room': room,

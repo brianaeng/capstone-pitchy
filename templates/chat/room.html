@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  {% load staticfiles %}
+  {% load static %}
   <h1>{{ room.label }}</h1>
   <p class="quiet">
     Anyone with this URL can join the room and chat:
@@ -35,6 +35,6 @@
 {% endblock content %}
 
 {% block afterbody %}
-  <script type="text/javascript" src='{% static "js/reconnecting-websocket.min.js" %}'></script>
-  <script type="text/javascript" src='{% static "js/chat.js" %}'></script>
+  <script type="text/javascript" src='{% static "reconnecting-websocket.min.js" %}'></script>
+  <script type="text/javascript" src='{% static "chat.js" %}'></script>
 {% endblock afterbody %}
