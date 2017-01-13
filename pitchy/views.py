@@ -40,6 +40,9 @@ class ProfileView(LoginRequiredMixin, TemplateView):
                 boolean = True
                 break
 
+        if profile == request.user.profile:
+            boolean = True
+        
         if profile.role == "PR":
             role = "Public Relations"
         else:
