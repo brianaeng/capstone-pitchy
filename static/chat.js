@@ -9,13 +9,13 @@ $(function() {
         var ele = $('<tr></tr>')
 
         ele.append(
-            $("<td></td>").text(data.timestamp)
+            $("<td></td>").text(data.sent_at)
         )
         ele.append(
-            $("<td></td>").text(data.handle)
+            $("<td></td>").text(data.sender)
         )
         ele.append(
-            $("<td></td>").text(data.message)
+            $("<td></td>").text(data.body)
         )
 
         chat.append(ele)

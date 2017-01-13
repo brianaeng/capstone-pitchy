@@ -67,3 +67,6 @@ class DirectMessage(models.Model):
     def __str__(self):
         output = "{}: {}".format(self.sender, self.body)
         return output
+
+    def as_dict(self):
+        return {'sender': self.sender, 'body': self.body, 'timestamp': self.sent_at}
