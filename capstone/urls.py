@@ -21,7 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'', include('pitchy.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^api/pitchy/', include('pitchy.api.urls', namespace="pitchy-api")),
+    # url(r'^api/pitchy/', include('pitchy.api.urls', namespace="pitchy-api")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

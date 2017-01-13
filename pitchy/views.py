@@ -2,13 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile, Friendship, Focus, User, Conversation, DirectMessage
 from forms import UserForm, ProfileForm, SignUpForm
 from django.contrib import messages
-# from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, FormView
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 import random
+
+import string
+from django.db import transaction
 
 class SignUpView(FormView):
     template_name = 'registration/signup.html'
@@ -152,3 +154,32 @@ def search(request):
     users = User.objects.filter(Q(first_name__icontains=search_text) | Q(last_name__icontains=search_text))
 
     return render(request, 'profiles/search.html', {'users': users})
+
+def new_room(request):
+    """
+    Randomly create a new room, and redirect to it.
+    """
+    new_convo = Conversation.objects.create(user1= request.user, user2=request.user)
+
+    label = new_convo.label
+
+    return redirect(chat_room, label=label)
+
+def chat_room(request, label):
+    """
+    Room view - show the room, with latest messages.
+
+    The template for this view has the WebSocket business to send and stream
+    messages, so see the template for where the magic happens.
+    """
+    # If the room with the given label doesn't exist, automatically create it
+    # upon first visit (a la etherpad).
+    room, created = Conversation.objects.get_or_create(label=label)
+
+    # We want to show the last 50 messages, ordered most-recent-last
+    messages = reversed(room.messages.order_by('-timestamp')[:50])
+
+    return render(request, "chat/room.html", {
+        'room': room,
+        'messages': messages,
+    })
