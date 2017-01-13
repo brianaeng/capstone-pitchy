@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import uuid
 
 # Create your models here.
 class Focus(models.Model):
@@ -46,6 +47,7 @@ class Friendship(models.Model):
 
 class Conversation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
+    label = models.UUIDField(default=uuid.uuid4, editable=False)
     user1 = models.ForeignKey(User, related_name="user_one")
     user2 = models.ForeignKey(User, related_name="user_two")
 
@@ -57,7 +59,8 @@ class DirectMessage(models.Model):
     #add a read_at?
     sent_at = models.DateTimeField(auto_now_add=True)
     conversation = models.ForeignKey(Conversation, related_name="messages")
-    sender = models.ForeignKey(User, related_name="message_sender")
+    # sender = models.ForeignKey(User, related_name="message_sender")
+    sender = models.TextField()
     body = models.TextField()
     # attachment = models.FileField(blank=True, )
 
