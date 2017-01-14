@@ -4,17 +4,11 @@
   <ul>
     {% for conversation in conversations %}
       <li>
-        {{ conversation }}
+        <a href="{% url 'messages' label=conversation.label %}">{{ conversation }}</a>
       </li>
     {% endfor %}
   </ul>
 
-  <ul>
-    {% for item in messages %}
-      <li>
-        {{ item }}
-      </li>
-    {% endfor %}
-  </ul>
+  <a class="button button-primary" href="{% url 'new_room' %}">New Conversation</a>
 
 {% endblock content %}

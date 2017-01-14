@@ -45,7 +45,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
         if profile == request.user.profile:
             boolean = True
-        
+
         if profile.role == "PR":
             role = "Public Relations"
         else:
@@ -130,13 +130,13 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
         return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests, 'recommendations': recommendations})
 
 class ConversationView(LoginRequiredMixin, TemplateView):
-    template_name = 'messaging/conversations.html'
+    template_name = 'chat/conversations.html'
 
-    def get(self, request, pk):
+    def get(self, request):
         conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
-        selected_convo = Conversation.objects.get(pk=pk)
-        messages = DirectMessage.objects.filter(conversation_id=selected_convo.id)
-        return render(request, self.template_name, {'conversations': conversations, 'messages': messages})
+        # selected_convo = Conversation.objects.get(pk=pk)
+        # messages = DirectMessage.objects.filter(conversation_id=selected_convo.id)
+        return render(request, self.template_name, {'conversations': conversations})
 
 def confirm_friend(request, pk):
     friendship = Friendship.objects.get(pk=pk)
