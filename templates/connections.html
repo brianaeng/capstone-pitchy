@@ -16,9 +16,9 @@
     {% for row in friends %}
       <li>
         {% if row.friend != user %}
-          <a href="{% url 'profile' pk=row.profile.id %}">{{ row.friend.username }}</a>
+          <a href="{% url 'profile' pk=row.friend.profile.id %}">{{ row.friend.username }}</a>
         {% elif row.user != user %}
-          <a href="{% url 'profile' pk=row.user.id %}">{{ row.user.username }}</a>
+          <a href="{% url 'profile' pk=row.user.profile.id %}">{{ row.user.username }}</a>
         {% endif %}
       </li>
     {% endfor %}
