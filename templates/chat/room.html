@@ -2,6 +2,15 @@
 
 {% block content %}
   {% load static %}
+  <div>
+    <ul>
+      {% for conversation in conversations %}
+        <li>
+          <a href="{% url 'chat' label=conversation.label %}">{{ conversation }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
   <h1>{{ room.label }}</h1>
   <form id="chatform">
     <table id="chat">

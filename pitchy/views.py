@@ -147,14 +147,11 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
 
         return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests, 'recommendations': recommendations})
 
-class ConversationView(LoginRequiredMixin, TemplateView):
-    template_name = 'chat/conversations.html'
-
-    def get(self, request):
-        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
-        # selected_convo = Conversation.objects.get(pk=pk)
-        # messages = DirectMessage.objects.filter(conversation_id=selected_convo.id)
-        return render(request, self.template_name, {'conversations': conversations})
+def conversations_start(request):
+    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+    last_convo = conversations.last()
+    label = last_convo.label
+    return redirect(chat_room, label=label)
 
 def confirm_friend(request, pk):
     friendship = Friendship.objects.get(pk=pk)
@@ -184,14 +181,14 @@ def start_chat(request, pk):
 
     return redirect(chat_room, label=label)
 
-def new_chat(request):
-    """
-    Randomly create a new room, and redirect to it.
-    """
-    label = haikunator.haikunate()
-    new_convo = Conversation.objects.create(user1= request.user, user2=request.user, label=label)
-
-    return redirect(chat_room, label=label)
+# def new_chat(request):
+#     """
+#     Randomly create a new room, and redirect to it.
+#     """
+#     label = haikunator.haikunate()
+#     new_convo = Conversation.objects.create(user1= request.user, user2=request.user, label=label)
+#
+#     return redirect(chat_room, label=label)
 
 def chat_room(request, label):
     """
@@ -200,6 +197,8 @@ def chat_room(request, label):
     The template for this view has the WebSocket business to send and stream
     messages, so see the template for where the magic happens.
     """
+    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+
     # If the room with the given label doesn't exist, automatically create it
     # upon first visit (a la etherpad).
     room, created = Conversation.objects.get_or_create(label=label)
@@ -210,4 +209,5 @@ def chat_room(request, label):
     return render(request, "chat/room.html", {
         'room': room,
         'messages': messages,
+        'conversations': conversations,
     })
