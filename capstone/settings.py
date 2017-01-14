@@ -155,15 +155,6 @@ STATICFILES_DIRS = [
 ]
 
 # Channel settings
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "asgi_redis.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": ['redis://localhost:6379'],
-#         },
-#         "ROUTING": "pitchy.routing.channel_routing",
-#     },
-# }
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgiref.inmemory.ChannelLayer",
