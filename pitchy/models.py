@@ -47,7 +47,7 @@ class Friendship(models.Model):
 
 class Conversation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    label = models.UUIDField(default=uuid.uuid4, editable=False)
+    label = models.SlugField(unique=True)
     user1 = models.ForeignKey(User, related_name="user_one")
     user2 = models.ForeignKey(User, related_name="user_two")
 
@@ -69,4 +69,4 @@ class DirectMessage(models.Model):
         return output
 
     def as_dict(self):
-        return {'sender': self.sender, 'body': self.body, 'timestamp': self.sent_at}
+        return {'sender': self.sender, 'body': self.body, 'sent_at': self.sent_at}

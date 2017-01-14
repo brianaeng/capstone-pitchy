@@ -11,6 +11,7 @@ import random
 
 import string
 from django.db import transaction
+import haikunator
 
 class SignUpView(FormView):
     template_name = 'registration/signup.html'
@@ -159,9 +160,8 @@ def new_room(request):
     """
     Randomly create a new room, and redirect to it.
     """
-    new_convo = Conversation.objects.create(user1= request.user, user2=request.user)
-
-    label = new_convo.label
+    label = haikunator.haikunate()
+    new_convo = Conversation.objects.create(user1= request.user, user2=request.user, label=label)
 
     return redirect(chat_room, label=label)
 

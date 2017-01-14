@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% load static %}
   <h3>Search</h3>
   {% csrf_token %}
   <input type="text" id="search" />
   <ul id="search-results">
 
   </ul>
-  
+
   <h1>Welcome, {{ user.username }}</h1>
   <h1>This is the connections page.</h1>
   <h3>Your friends:</h3>
@@ -52,3 +53,7 @@
     </ul>
   {% endif %}
 {% endblock content %}
+
+{% block afterbody %}
+  <script type="text/javascript" src="{% static 'search.js' %}"></script>
+{% endblock afterbody %}
