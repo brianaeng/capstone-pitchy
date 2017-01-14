@@ -59,10 +59,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
             #This is inefficient in the longrun bc it creates a conversation for EVERY friendship if the profile page is accessed a friend, instead of the user actively making the conversation
             if convo == None:
-                label = haikunator.haikunate()
-                new_convo = Conversation.objects.create(user1=request.user, user2=profile.user, label=label)
-
-                url = new_convo.label
+                url = True
             else:
                 url = convo.label
 
@@ -179,6 +176,13 @@ def search(request):
     users = User.objects.filter(Q(first_name__icontains=search_text) | Q(last_name__icontains=search_text))
 
     return render(request, 'profiles/search.html', {'users': users})
+
+def start_chat(request, pk):
+    friend = User.objects.get(pk=pk)
+    label = haikunator.haikunate()
+    new_convo = Conversation.objects.create(user1= request.user, user2=friend, label=label)
+
+    return redirect(chat_room, label=label)
 
 def new_chat(request):
     """

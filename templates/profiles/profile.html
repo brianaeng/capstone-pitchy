@@ -5,7 +5,11 @@
 <h1>{{ profile.user.username }}</h1>
 {% if boolean %}
   {% if url != None %}
-    <a href="{% url 'chat' label=url %}">Message</a>
+    {% if url == True %}
+      <a href="{% url 'new_chat' pk=profile.user.pk %}">Message</a>
+    {% else %}
+      <a href="{% url 'chat' label=url %}">Message</a>
+    {% endif %}
   {% endif %}
 {% else %}
   <form action="{% url 'request_friend' pk=profile.user.pk %}">
