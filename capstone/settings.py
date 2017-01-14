@@ -162,6 +162,16 @@ CHANNEL_LAYERS = {
     },
 }
 
+#this messes up admin?
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "asgi_redis.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("localhost", 6379)],
+#         },
+#         "ROUTING": "capstone.routing.channel_routing",
+#     },
+# }
 # Logging
 LOGGING = {
     'version': 1,
