@@ -57,6 +57,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         if this_friendship and this_friendship.confirmed:
             convo = Conversation.objects.filter(Q(user1=request.user, user2=profile.user) | Q(user1=profile.user, user2=request.user)).first()
 
+            #This is inefficient in the longrun bc it creates a conversation for EVERY friendship if the profile page is accessed a friend, instead of the user actively making the conversation
             if convo == None:
                 label = haikunator.haikunate()
                 new_convo = Conversation.objects.create(user1=request.user, user2=profile.user, label=label)
