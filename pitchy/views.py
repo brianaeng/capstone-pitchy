@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 import random
+from django.core.exceptions import ObjectDoesNotExist
 
 import string
 from django.db import transaction
@@ -36,22 +37,40 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html'
     def get(self, request, pk):
         profile = get_object_or_404(Profile, pk=pk)
+
+        #See if profile user is friends with current user
         current_user_friends = Friendship.objects.filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
         boolean = False
         for friendship in current_user_friends:
             if friendship.user == profile.user or friendship.friend == profile.user:
+                this_friendship = friendship
                 boolean = True
                 break
 
         if profile == request.user.profile:
             boolean = True
 
+        #Build correct URL for chat based on 1) if confirmed friends & 2) if chat already exists
+        url = None
+
+        if this_friendship.confirmed:
+            convo = Conversation.objects.filter(Q(user1=request.user, user2=profile.user) | Q(user1=profile.user, user2=request.user)).first()
+
+            if convo == None:
+                label = haikunator.haikunate()
+                new_convo = Conversation.objects.create(user1=request.user, user2=profile.user, label=label)
+
+                url = new_convo.label
+            else:
+                url = convo.label
+
+        #Output role given user's profile
         if profile.role == "PR":
             role = "Public Relations"
         else:
             role = "Journalist"
 
-        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean})
+        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean, 'url': url})
 
 class UpdateProfileView(LoginRequiredMixin, FormView):
     template_name = 'profiles/update_profile.html'
@@ -159,7 +178,7 @@ def search(request):
 
     return render(request, 'profiles/search.html', {'users': users})
 
-def new_room(request):
+def new_chat(request):
     """
     Randomly create a new room, and redirect to it.
     """
