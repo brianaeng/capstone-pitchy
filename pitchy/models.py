@@ -68,5 +68,9 @@ class DirectMessage(models.Model):
         output = "{}: {}".format(self.sender, self.body)
         return output
 
+    @property
+    def formatted_timestamp(self):
+        return self.sent_at.strftime('%b %-d %-I:%M %p')
+
     def as_dict(self):
-        return {'sender': self.sender, 'body': self.body, 'sent_at': self.sent_at}
+        return {'sender': self.sender, 'body': self.body, 'sent_at': self.formatted_timestamp}

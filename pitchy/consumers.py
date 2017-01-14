@@ -80,9 +80,12 @@
 
 from channels import Group
 from channels.sessions import channel_session
+from channels.auth import channel_session_user_from_http, channel_session_user
+import json
+
 from .models import Conversation
 
-@channel_session
+@channel_session_user_from_http
 def ws_connect(message):
     prefix, label = message['path'].strip('/').split('/')
     room = Conversation.objects.get(label=label)
@@ -93,11 +96,11 @@ def ws_connect(message):
 def ws_receive(message):
     label = message.channel_session['room']
     room = Conversation.objects.get(label=label)
-    data = json.loads(message['body'])
+    data = json.loads(message['text'])
     m = room.messages.create(sender=data['sender'], body=data['body'])
     Group('chat-'+label).send({'text': json.dumps(m.as_dict())})
 
-@channel_session
+@channel_session_user
 def ws_disconnect(message):
     label = message.channel_session['room']
     Group('chat-'+label).discard(message.reply_channel)
