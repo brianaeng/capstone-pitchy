@@ -85,8 +85,10 @@ import json
 
 from .models import Conversation
 
-@channel_session_user_from_http
+# @channel_session_user_from_http
+@channel_session
 def ws_connect(message):
+    message.reply_channel.send({"accept": True})
     prefix, label = message['path'].strip('/').split('/')
     room = Conversation.objects.get(label=label)
     Group('chat-' + label).add(message.reply_channel)
@@ -100,7 +102,8 @@ def ws_receive(message):
     m = room.messages.create(sender=data['sender'], body=data['body'])
     Group('chat-'+label).send({'text': json.dumps(m.as_dict())})
 
-@channel_session_user
+# @channel_session_user
+@channel_session
 def ws_disconnect(message):
     label = message.channel_session['room']
     Group('chat-'+label).discard(message.reply_channel)

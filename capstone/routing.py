@@ -16,3 +16,12 @@
 #     # HTTP handling - e.g. long-polling - you can do it here and route by path, and let the rest
 #     # fall through to normal views.
 # ]
+
+from channels.routing import route
+from pitchy.consumers import ws_connect, ws_receive, ws_disconnect
+
+channel_routing = [
+    route("websocket.connect", ws_connect),
+    route("websocket.receive", ws_receive),
+    route("websocket.disconnect", ws_disconnect),
+]

@@ -167,7 +167,7 @@ STATICFILES_DIRS = [
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "pitchy.routing.channel_routing",
+        "ROUTING": "capstone.routing.channel_routing",
     },
 }
 
