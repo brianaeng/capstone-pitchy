@@ -2,21 +2,22 @@
 
 {% block content %}
   {% load static %}
+  <div>
+    <ul>
+      {% for conversation in conversations %}
+        <li>
+          <a href="{% url 'chat' label=conversation.label %}">{{ conversation }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
   <h1>{{ room.label }}</h1>
-  <p class="quiet">
-    Anyone with this URL can join the room and chat:
-    <code>{{ request.scheme }}://{{ request.get_host }}/{{ room.label }}</code>
-  </p>
-  <p>
-    <label for="handle">Your name:</label>
-    <input id="handle" type="text" placeholder="handle">
-  </p>
   <form id="chatform">
     <table id="chat">
       <tbody>
         {% for message in messages %}
           <tr>
-            <td>{{ message.sent_at }}</td>
+            <td>{{ message.formatted_timestamp }}</td>
             <td>{{ message.sender }}</td>
             <td>{{ message.body }}</td>
           </tr>
@@ -24,10 +25,12 @@
       </tbody>
       <tfoot>
       <tr>
-        <td>Say something:</td>
+        <td> </td>
+        <td> </td>
         <td colspan=2>
           <input id="message" type="text" placeholder="message">
-          <button type="submit" id="go">Say it</button>
+          <input id="handle" type="hidden" value="{{ request.user.username }}">
+          <button type="submit" id="go">Send</button>
         </td>
       </tfoot>
     </table>

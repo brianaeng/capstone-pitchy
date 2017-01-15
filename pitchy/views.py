@@ -10,7 +10,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 import random
 
 import string
-from django.db import transaction
 import haikunator
 
 class SignUpView(FormView):
@@ -36,22 +35,39 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profiles/profile.html'
     def get(self, request, pk):
         profile = get_object_or_404(Profile, pk=pk)
+
+        #See if profile user is friends with current user
         current_user_friends = Friendship.objects.filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
         boolean = False
+        this_friendship = None
         for friendship in current_user_friends:
             if friendship.user == profile.user or friendship.friend == profile.user:
+                this_friendship = friendship
                 boolean = True
                 break
 
         if profile == request.user.profile:
             boolean = True
-        
+
+        #Build correct URL for chat based on 1) if confirmed friends & 2) if chat already exists
+        url = None
+
+        if this_friendship and this_friendship.confirmed:
+            convo = Conversation.objects.filter(Q(user1=request.user, user2=profile.user) | Q(user1=profile.user, user2=request.user)).first()
+
+            #This is inefficient in the longrun bc it creates a conversation for EVERY friendship if the profile page is accessed a friend, instead of the user actively making the conversation
+            if convo == None:
+                url = True
+            else:
+                url = convo.label
+
+        #Output role given user's profile
         if profile.role == "PR":
             role = "Public Relations"
         else:
             role = "Journalist"
 
-        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean})
+        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean, 'url': url})
 
 class UpdateProfileView(LoginRequiredMixin, FormView):
     template_name = 'profiles/update_profile.html'
@@ -129,26 +145,54 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
 
         return render(request, self.template_name, {'friends': friends, 'friend_requests': friend_requests, 'recommendations': recommendations})
 
-class ConversationView(LoginRequiredMixin, TemplateView):
-    template_name = 'messaging/conversations.html'
+#This is to allow the user to find the person they want to chat, and then pass that to start_chat?
+# def create_chat(request):
 
-    def get(self, request, pk):
-        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
-        selected_convo = Conversation.objects.get(pk=pk)
-        messages = DirectMessage.objects.filter(conversation_id=selected_convo.id)
-        return render(request, self.template_name, {'conversations': conversations, 'messages': messages})
 
+#This starts a chat with a pre-determined friend via their pk
+def start_chat(request, pk):
+    friend = User.objects.get(pk=pk)
+    label = haikunator.haikunate()
+    new_convo = Conversation.objects.create(user1= request.user, user2=friend, label=label)
+
+    return redirect(chat_room, label=label)
+
+#View for a given conversation via the conversation's label
+def chat_room(request, label):
+    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+
+    room, created = Conversation.objects.get_or_create(label=label)
+
+    # We want to show the last 50 messages, ordered most-recent-last
+    messages = reversed(room.messages.order_by('-sent_at')[:50])
+
+    return render(request, "chat/room.html", {'room': room, 'messages': messages, 'conversations': conversations})
+
+#Linked in the main nav bar (Messages) w/ the purpose of redirecting to the most recent conversation
+def recent_messages(request):
+    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+
+    if not conversations:
+        return redirect('connections') #Replace this once create conversations page is made
+    else:
+        last_convo = conversations.last()
+        label = last_convo.label
+        return redirect(chat_room, label=label)
+
+#Button on the Connections page w/ the purpose of confirming a requested friendship
 def confirm_friend(request, pk):
     friendship = Friendship.objects.get(pk=pk)
     friendship.confirmed = True
     friendship.save()
     return redirect('connections')
 
+#Button on a given Profile page (if not already friends) w/ the purpose of requesting someone to be your friend
 def request_friend(request, pk):
     person = User.objects.get(pk=pk)
     Friendship.objects.create(user=request.user, friend=person, confirmed=False)
     return redirect('profile', pk=pk)
 
+#Search bar on the top of the Connections page w/ the purpose of giving search results
 def search(request):
     if request.method == 'POST':
         search_text = request.POST['search_text'].lower()
@@ -158,31 +202,3 @@ def search(request):
     users = User.objects.filter(Q(first_name__icontains=search_text) | Q(last_name__icontains=search_text))
 
     return render(request, 'profiles/search.html', {'users': users})
-
-def new_room(request):
-    """
-    Randomly create a new room, and redirect to it.
-    """
-    label = haikunator.haikunate()
-    new_convo = Conversation.objects.create(user1= request.user, user2=request.user, label=label)
-
-    return redirect(chat_room, label=label)
-
-def chat_room(request, label):
-    """
-    Room view - show the room, with latest messages.
-
-    The template for this view has the WebSocket business to send and stream
-    messages, so see the template for where the magic happens.
-    """
-    # If the room with the given label doesn't exist, automatically create it
-    # upon first visit (a la etherpad).
-    room, created = Conversation.objects.get_or_create(label=label)
-
-    # We want to show the last 50 messages, ordered most-recent-last
-    messages = reversed(room.messages.order_by('-sent_at')[:50])
-
-    return render(request, "chat/room.html", {
-        'room': room,
-        'messages': messages,
-    })
