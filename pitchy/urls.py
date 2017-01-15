@@ -10,10 +10,11 @@ urlpatterns = [
     url(r'^profile/edit/$', views.UpdateProfileView.as_view(), name='update_profile'),
     url(r'^connections/$', views.ConnectionsView.as_view(), name='connections'),
     url(r'^profiles/(?P<pk>\d+)/$', views.ProfileView.as_view(), name='profile'),
-    url(r'^messages/$', views.conversations_start, name='messages'),
+    url(r'^messages/$', views.recent_messages, name='messages'),
     url(r'^friendship/confirm/(?P<pk>\d+)/', views.confirm_friend, name='confirmation'),
     url(r'^friendship/request/(?P<pk>\d+)/', views.request_friend, name='request_friend'),
     url(r'^search/$', views.search, name='search'),
-    url(r'^(?P<label>[A-Za-z0-9\-\_]+)/$', views.chat_room, name='chat'),
-    url(r'^new_chat/(?P<pk>\d+)', views.start_chat, name='new_chat')
+    url(r'^new_chat/(?P<pk>\d+)', views.start_chat, name='new_chat'),
+    # url(r'^create_chat/$', views.create_chat, name='create_chat'),
+    url(r'^(?P<label>[A-Za-z0-9\-\_]+)/$', views.chat_room, name='chat')
 ]
