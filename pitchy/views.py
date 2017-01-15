@@ -168,12 +168,16 @@ def chat_room(request, label):
 
     return render(request, "chat/room.html", {'room': room, 'messages': messages, 'conversations': conversations})
 
-#Linked in the main nav bar (MEssages) w/ the purpose of redirecting to the most recent conversation
+#Linked in the main nav bar (Messages) w/ the purpose of redirecting to the most recent conversation
 def recent_messages(request):
     conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
-    last_convo = conversations.last()
-    label = last_convo.label
-    return redirect(chat_room, label=label)
+
+    if not conversations:
+        return redirect('connections') #Replace this once create conversations page is made
+    else:
+        last_convo = conversations.last()
+        label = last_convo.label
+        return redirect(chat_room, label=label)
 
 #Button on the Connections page w/ the purpose of confirming a requested friendship
 def confirm_friend(request, pk):
