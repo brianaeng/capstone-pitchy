@@ -17,7 +17,7 @@
       <tbody>
         {% for message in messages %}
           <tr>
-            <td>{{ message.sent_at }}</td>
+            <td>{{ message.formatted_timestamp }}</td>
             <td>{{ message.sender }}</td>
             <td>{{ message.body }}</td>
           </tr>
