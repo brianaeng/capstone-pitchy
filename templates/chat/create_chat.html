@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="post">
+    {% csrf_token %}
+    <!-- GET RECIPIENTS -->
+    <label for="message_receivers">Recipient(s):</label>
+    <select multiple="multiple" id="recipient_options" name="recipients" required>
+      <option value="1" selected="selected">
+        PERSON'S NAME
+      </option>
+    </select>
+
+    <!-- GET MESSAGE -->
+    <label for="message_body">Message:</label>
+    <input id="message_body" name="body" type="text" />
+
+    <button type="submit">Send</button>
+  </form>
+
+{% endblock content %}
