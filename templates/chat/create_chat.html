@@ -6,9 +6,11 @@
     <!-- GET RECIPIENTS -->
     <label for="message_receivers">Recipient(s):</label>
     <select multiple="multiple" id="recipient_options" name="recipients" required>
-      <option value="1" selected="selected">
-        PERSON'S NAME
-      </option>
+      {% for user in users %}
+        <option value="{{ user.pk }}">
+          {{ user.username }}
+        </option>
+      {% endfor %}
     </select>
 
     <!-- GET MESSAGE -->
