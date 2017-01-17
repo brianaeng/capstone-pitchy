@@ -295,16 +295,30 @@ ul#friends-list, ul#friend-requests {
 }
 
 /* -- CHAT -- */
-p.deck {
-    font-size: 2.5rem;
-    font-weight: 200;
+#conversation-page {
+  width: 85%;
+  margin: 0 auto;
 }
 
-p.deck a {
-    text-decoration: none;
+#convos-list li {
+  list-style: none;
 }
 
-.quiet {
-    font-size: 90%;
-    color: #999;
+#convos-list {
+  margin-top: 5rem;
+  height: 35rem;
+  overflow-y: auto;
+}
+
+#chat tbody, #chat tfoot {
+  display: block;
+}
+
+#chat tfoot #convo-input #message {
+  width: 50rem;
+}
+
+#chat tbody {
+  height: 35rem;
+  overflow-y: auto;
 }
