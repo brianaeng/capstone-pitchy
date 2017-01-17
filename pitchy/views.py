@@ -204,6 +204,12 @@ def confirm_friend(request, pk):
     friendship.save()
     return redirect('connections')
 
+#Button on the Connections page w/ the purpose of rejecting a requested friendship
+def reject_friend(request, pk):
+    friendship = Friendship.objects.get(pk=pk)
+    friendship.delete()
+    return redirect('connections')
+
 #Button on a given Profile page (if not already friends) w/ the purpose of requesting someone to be your friend
 def request_friend(request, pk):
     person = User.objects.get(pk=pk)

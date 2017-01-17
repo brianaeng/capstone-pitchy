@@ -2,56 +2,76 @@
 
 {% block content %}
   {% load static %}
-  <h3>Search</h3>
-  {% csrf_token %}
-  <input type="text" id="search" />
-  <ul id="search-results">
 
-  </ul>
+  <h2 id="welcome-user">Welcome, {{ user.first_name }} {{ user.last_name }}</h2>
 
-  <h1>Welcome, {{ user.username }}</h1>
-  <h1>This is the connections page.</h1>
-  <h3>Your friends:</h3>
-  <ul>
-    {% for row in friends %}
-      <li>
-        {% if row.friend != user %}
-          <a href="{% url 'profile' pk=row.friend.profile.id %}">{{ row.friend.username }}</a>
-        {% elif row.user != user %}
-          <a href="{% url 'profile' pk=row.user.profile.id %}">{{ row.user.username }}</a>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
+  <div id="search-widget">
+    {% csrf_token %}
+    <input type="text" id="search" placeholder="Search"/>
+    <ul id="search-results">
 
-  <h3>Your friend requests:</h3>
-  <ul>
-    {% for row in friend_requests %}
-      <li>
-        <a href="{% url 'profile' pk=row.user.id %}">{{ row.user.username }}</a>
-        <form action="{% url 'confirmation' pk=row.pk %}">
-          <input type="submit" value="Accept Request" />
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <h3>Recommendations</h3>
-  {% if not recommendations %}
-    <p>
-      Sorry, no recommendations.
-    </p>
-  {% else %}
-    <ul>
-      {% for person in recommendations %}
-        {% if person.id != request.user.profile.id %}
-          <li>
-            <a href="{% url 'profile' pk=person.id %}">{{ person.user.username }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
     </ul>
-  {% endif %}
+  </div>
+
+  <div class="container">
+
+    <!-- columns should be the immediate child of a .row -->
+    <div class="row">
+      <div class="six columns">
+        <h4>Your friends:</h4>
+        <ul id="friends-list">
+          {% for row in friends %}
+            <li>
+              {% if row.friend != user %}
+                <a href="{% url 'profile' pk=row.friend.profile.id %}"><img src="{{ row.friend.profile.pic.url }}"></img>{{ row.friend.username }}</a>
+              {% elif row.user != user %}
+                <a href="{% url 'profile' pk=row.user.profile.id %}"><img src="{{ row.user.profile.pic.url }}"></img>{{ row.user.username }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="six columns">
+        <h4>Your friend requests:</h4>
+        <ul id="friend-requests">
+          {% for row in friend_requests %}
+            <li>
+              <a href="{% url 'profile' pk=row.user.id %}"><img src="{{ row.user.profile.pic.url }}"></img>{{ row.user.username }}</a>
+              <div id="decision-buttons">
+                <a href="{% url 'confirmation' pk=row.pk %}" id="accept-friend">Accept</a>
+                <a href="{% url 'rejection' pk=row.pk %}" id="reject-friend">Reject</a>
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <section id="friend-recommendations">
+    <h4>Recommendations</h4>
+    {% if not recommendations %}
+      <p>
+        Sorry, no recommendations.
+      </p>
+    {% else %}
+      <ul>
+        {% for person in recommendations %}
+          <li id="recommendation-item">
+            <a href="{% url 'profile' pk=person.id %}">
+              <img src="{{ person.pic.url }}"></img>
+              {{ person.user.username }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
+
 {% endblock content %}
 
 {% block afterbody %}
