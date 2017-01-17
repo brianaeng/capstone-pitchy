@@ -75,7 +75,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'capstone.wsgi.application'
+# WSGI_APPLICATION = 'capstone.wsgi.application'
 
 
 # Database
@@ -155,23 +155,23 @@ STATICFILES_DIRS = [
 ]
 
 # Channel settings
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "capstone.routing.channel_routing",
-    },
-}
-
-#this messes up admin?
 # CHANNEL_LAYERS = {
 #     "default": {
-#         "BACKEND": "asgi_redis.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("localhost", 6379)],
-#         },
+#         "BACKEND": "asgiref.inmemory.ChannelLayer",
 #         "ROUTING": "capstone.routing.channel_routing",
 #     },
 # }
+
+#this messes up admin?
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+        "ROUTING": "capstone.routing.channel_routing",
+    },
+}
 # Logging
 LOGGING = {
     'version': 1,

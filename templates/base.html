@@ -7,22 +7,24 @@
     <link rel="stylesheet" type="text/css" href="{% static 'normalize.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'skeleton.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'pitchy.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
   </head>
   <body>
     <div class="page-header">
-      <h2 id="site-nav"><a href="/">Pitchy</a></h2>
-      <nav id="other-nav">
-        {% if request.user.is_authenticated %}
-          <a href="/connections">Connections</a>
-          <a href="/messages">Messages</a>
-          <a href="{% url 'update_profile' %}">Profile</a>
-          <a href="/logout">Sign Out</a>
-        {% else %}
-          <a href="/login">Login</a>
-          <a href="/signup">Sign Up</a>
-        {% endif %}
-      </nav>
-
+      <div class="whole-nav">
+        <h1 id="site-nav"><a href="/">Pitchy</a></h1>
+        <nav id="other-nav">
+          {% if request.user.is_authenticated %}
+            <a href="/connections">Connections</a>
+            <a href="/messages">Messages</a>
+            <a href="{% url 'update_profile' %}">Profile</a>
+            <a href="/logout">Sign Out</a>
+          {% else %}
+            <a href="/login">LOG IN</a>
+            <a href="/signup">SIGN UP</a>
+          {% endif %}
+        </nav>
+      </div>
     </div>
 
     <div class="content container">

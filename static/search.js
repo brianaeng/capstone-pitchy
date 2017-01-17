@@ -1,6 +1,6 @@
 $(function (){
   $('#search').keyup(function(e) {
-    if (e.which <= 90 && e.which >= 48 || e.which == 8) {
+    if ((e.which <= 90 && e.which >= 48 || e.which == 8) && $('#search').val() !== '') {
       $.ajax({
         type: "POST",
         url: "/search/",

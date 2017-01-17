@@ -1,5 +1,9 @@
 /* -- GENERAL - BASE.HTML -- */
 body {
+  font-family: helvetica;
+}
+
+.content-container {
   padding: 2rem 0 0 2rem;
   width: 85%;
   margin: 0 auto;
@@ -9,27 +13,40 @@ a {
   text-decoration: none;
 }
 
-.page-header {
-  margin: 2rem;
-  height: 4rem;
+#other-nav a:hover {
+  opacity: .5;
 }
 
-.page-header * {
-  display: inline;
-  vertical-align: middle;
+.page-header {
+  height: 8rem;
+  background-color: rgb(130, 130, 130);
+  margin-bottom: 2rem;
+}
+
+.whole-nav {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.whole-nav a {
+  color: rgb(255, 255, 255);
 }
 
 #site-nav {
+  vertical-align: middle;
   float: left;
+  font-family: 'Abril Fatface', cursive;
+  margin: .75rem 0 1rem 0;
 }
 
 #other-nav {
+  margin: 2.5rem 0;
   float: right;
 }
 
 #other-nav a {
   margin: 1rem;
-  font-size: 2rem;
+  font-size: 2.25rem;
 }
 
 /* -- GENERAL ALERTS -- */
@@ -64,15 +81,39 @@ a {
 }
 
 /* -- HOMEPAGE.HTML -- */
-.homepage-content {
+#homepage-welcome, #homepage-points, #homepage-intro {
+  margin: 4rem auto;
   text-align: center;
 }
 
-/* -- CHAT -- */
-body {
-    padding-top: 4em;
+
+#homepage-points div {
+  display: inline-block;
+  margin: 3rem;
 }
 
+/* -- LOG IN/SIGN-UP -- */
+.registration-form {
+  margin: 4rem auto;
+  width: 50%;
+  text-align: center;
+}
+
+.registration-form h2 {
+  font-weight: bold;
+}
+
+.registration-form label, .registration-form input, .registration-form button {
+  margin: 1.5rem auto;
+  display: block;
+}
+
+.helptext {
+  opacity: .5;
+  display: block;
+}
+
+/* -- CHAT -- */
 p.deck {
     font-size: 2.5rem;
     font-weight: 200;

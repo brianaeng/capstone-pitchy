@@ -1,19 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1 class="homepage-content">WELCOME!</h1>
+  <h1 id="homepage-welcome">Welcome!</h1>
 
-  <h4>Pitchy connects public relations professionals and journalists for easier communication and relationship development.</h4>
+  <h4 id="homepage-intro">Pitchy connects public relations professionals and journalists for easier communication and relationship development.</h4>
 
-  <div>
-    <p>
-      Communicate effectively
-    </p>
-    <p>
-      Connect quickly and efficiently
-    </p>
-    <p>
-      Find new contacts
-    </p>
-  </div>
+  <section id="homepage-points">
+    <div>
+      <img src="static/chat.png" alt="chat icon">
+      <p>
+        Communicate effectively
+      </p>
+    </div>
+    <div>
+      <img src="static/bolt.png" alt="bolt icon">
+      <p>
+        Connect quickly & efficiently
+      </p>
+    </div>
+    <div>
+      <img src="static/people.png" alt="people icon">
+      <p>
+        Find new contacts
+      </p>
+    </div>
+  </section>
 {% endblock content %}
