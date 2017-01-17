@@ -3,8 +3,8 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.content-container {
-  padding: 2rem 0 0 2rem;
+.content {
+  padding: 2rem;
   width: 85%;
   margin: 0 auto;
 }
@@ -92,10 +92,13 @@ a:hover {
   text-align: center;
 }
 
-
 #homepage-points div {
   display: inline-block;
   margin: 3rem;
+}
+
+#homepage-points div img {
+  margin: 1rem;
 }
 
 /* -- LOG IN/SIGN-UP -- */

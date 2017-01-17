@@ -3,7 +3,7 @@
 {% block content %}
   {% load static %}
 
-  <h2 id="welcome-user">Welcome, {{ user.first_name }} {{ user.last_name }}</h2>
+  <h2 id="welcome-user">Welcome, {{ user.first_name }}</h2>
 
   <div id="search-widget">
     {% csrf_token %}
@@ -49,28 +49,27 @@
 
     </div>
 
+    <section id="friend-recommendations">
+      <h4>Recommendations</h4>
+      {% if not recommendations %}
+        <p>
+          Sorry, no recommendations.
+        </p>
+      {% else %}
+        <ul>
+          {% for person in recommendations %}
+            <li id="recommendation-item">
+              <a href="{% url 'profile' pk=person.id %}">
+                <img src="{{ person.pic.url }}"></img>
+                {{ person.user.username }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </section>
+
   </div>
-
-
-  <section id="friend-recommendations">
-    <h4>Recommendations</h4>
-    {% if not recommendations %}
-      <p>
-        Sorry, no recommendations.
-      </p>
-    {% else %}
-      <ul>
-        {% for person in recommendations %}
-          <li id="recommendation-item">
-            <a href="{% url 'profile' pk=person.id %}">
-              <img src="{{ person.pic.url }}"></img>
-              {{ person.user.username }}
-            </a>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-  </section>
 
 {% endblock content %}
 
