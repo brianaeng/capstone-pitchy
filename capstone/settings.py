@@ -162,7 +162,6 @@ STATICFILES_DIRS = [
 #     },
 # }
 
-#this messes up admin?
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
