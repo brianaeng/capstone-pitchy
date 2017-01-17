@@ -1,6 +1,6 @@
 /* -- GENERAL - BASE.HTML -- */
 body {
-  font-family: helvetica;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .content-container {
@@ -112,6 +112,80 @@ a {
   opacity: .5;
   display: block;
 }
+
+/* -- UPDATE PROFILE PAGE -- */
+#update-profile {
+  margin: 4rem auto;
+  width: 50%;
+  text-align: center;
+}
+
+#update-profile p:nth-of-type(4) * {
+  display: block;
+}
+
+#update-profile input[id="id_pic"] {
+  margin: 0 auto;
+}
+
+#update-profile input[type="checkbox"], #update-profile label[for="pic-clear_id"] {
+  display: none;
+}
+
+#update-profile textarea {
+  height: 15rem;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* -- PROFILE PAGE --*/
+.profile {
+  margin: 4rem auto;
+  width: 80%;
+}
+
+#profile-username, #profile-pic, #profile-actions {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+#profile-username {
+  font-size: 4.8rem;
+}
+
+#profile-pic img {
+  object-fit: cover;
+  width: 14rem;
+  height: 14rem;
+  padding: 1rem;
+  border: solid rgba(221, 221, 221, 0) 1px;
+  border-radius: 50%;
+}
+
+#profile-actions a {
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  padding: 1rem;
+  background-color: rgb(167, 167, 167);
+}
+
+#profile-list-details {
+  margin: 3rem auto;
+}
+
+#profile-list-details a {
+  color: rgb(167, 167, 167);
+}
+
+#profile-list-details li:not(#keep-bullet)  {
+  list-style-type: none;
+  margin: 2rem auto;
+}
+
+.profile-label {
+  font-size: 1.75rem;
+}
+
 
 /* -- CHAT -- */
 p.deck {

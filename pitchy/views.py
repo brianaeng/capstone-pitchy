@@ -46,9 +46,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
                 boolean = True
                 break
 
-        if profile == request.user.profile:
-            boolean = True
-
         #Build correct URL for chat based on 1) if confirmed friends & 2) if chat already exists
         url = None
 
