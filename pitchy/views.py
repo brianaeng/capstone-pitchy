@@ -46,9 +46,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
                 boolean = True
                 break
 
-        if profile == request.user.profile:
-            boolean = True
-
         #Build correct URL for chat based on 1) if confirmed friends & 2) if chat already exists
         url = None
 
@@ -180,14 +177,17 @@ def start_chat(request, pk):
 
 #View for a given conversation via the conversation's label
 def chat_room(request, label):
-    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+    convo = Conversation.objects.get(label=label)
 
-    room, created = Conversation.objects.get_or_create(label=label)
+    if convo.user1 == request.user or convo.user2 == request.user:
+        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
 
-    # We want to show the last 50 messages, ordered most-recent-last
-    messages = reversed(room.messages.order_by('-sent_at')[:50])
+        # We want to show the last 50 messages, ordered most-recent-last
+        messages = reversed(convo.messages.order_by('-sent_at')[:50])
 
-    return render(request, "chat/room.html", {'room': room, 'messages': messages, 'conversations': conversations})
+        return render(request, "chat/convo.html", {'convo': convo, 'messages': messages, 'conversations': conversations})
+    else:
+        return redirect("connections")
 
 #Linked in the main nav bar (Messages) w/ the purpose of redirecting to the most recent conversation
 def recent_messages(request):
@@ -205,6 +205,12 @@ def confirm_friend(request, pk):
     friendship = Friendship.objects.get(pk=pk)
     friendship.confirmed = True
     friendship.save()
+    return redirect('connections')
+
+#Button on the Connections page w/ the purpose of rejecting a requested friendship
+def reject_friend(request, pk):
+    friendship = Friendship.objects.get(pk=pk)
+    friendship.delete()
     return redirect('connections')
 
 #Button on a given Profile page (if not already friends) w/ the purpose of requesting someone to be your friend

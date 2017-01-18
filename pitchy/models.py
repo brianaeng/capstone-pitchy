@@ -17,8 +17,8 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     pic = models.ImageField(blank=True)
     bio = models.TextField()
-    social_handle = models.CharField(max_length=20, blank=True)
-    company = models.CharField(max_length=50, blank=True)
+    social_handle = models.CharField(max_length=20)
+    company = models.CharField(max_length=50)
     focuses = models.ManyToManyField(Focus)
     role = models.CharField(max_length=30, choices=(("PR", "Public Relations Professional"), ("JOURNO", "Journalist")))
 

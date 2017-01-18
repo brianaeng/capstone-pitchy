@@ -1,16 +1,22 @@
 /* -- GENERAL - BASE.HTML -- */
 body {
-  font-family: helvetica;
+  font-family: 'Open Sans', sans-serif;
 }
 
-.content-container {
-  padding: 2rem 0 0 2rem;
+.content {
+  padding: 2rem;
   width: 85%;
   margin: 0 auto;
 }
 
 a {
   text-decoration: none;
+  color: rgb(167, 167, 167);
+}
+
+a:hover {
+  color: rgb(167, 167, 167);
+  opacity: .5;
 }
 
 #other-nav a:hover {
@@ -86,10 +92,13 @@ a {
   text-align: center;
 }
 
-
 #homepage-points div {
   display: inline-block;
   margin: 3rem;
+}
+
+#homepage-points div img {
+  margin: 1rem;
 }
 
 /* -- LOG IN/SIGN-UP -- */
@@ -113,17 +122,203 @@ a {
   display: block;
 }
 
+/* -- UPDATE PROFILE PAGE -- */
+#update-profile {
+  margin: 4rem auto;
+  width: 50%;
+  text-align: center;
+}
+
+#update-profile p:nth-of-type(4) * {
+  display: block;
+}
+
+#update-profile input[id="id_pic"] {
+  margin: 0 auto;
+}
+
+#update-profile input[type="checkbox"], #update-profile label[for="pic-clear_id"] {
+  display: none;
+}
+
+#update-profile textarea {
+  height: 15rem;
+  width: auto;
+  margin: 0 auto;
+}
+
+/* -- PROFILE PAGE --*/
+.profile {
+  margin: 4rem auto;
+  width: 80%;
+}
+
+#profile-username, #profile-pic, #profile-actions {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+#profile-username {
+  font-size: 4.8rem;
+}
+
+#profile-pic img {
+  object-fit: cover;
+  width: 14rem;
+  height: 14rem;
+  padding: 1rem;
+  border: solid rgba(221, 221, 221, 0) 1px;
+  border-radius: 50%;
+}
+
+#profile-actions a {
+  color: rgb(255, 255, 255);
+  font-size: 1.5rem;
+  padding: 1rem;
+  background-color: rgb(167, 167, 167);
+}
+
+#profile-list-details {
+  margin: 3rem auto;
+}
+
+#profile-list-details li:not(#keep-bullet)  {
+  list-style-type: none;
+  margin: 2rem auto;
+}
+
+.profile-label {
+  font-size: 1.75rem;
+}
+
+/* -- CONNECTIONS -- */
+#search-widget {
+  text-align: center;
+  margin: 2rem auto;
+}
+
+#search-widget input, #search-widget #search-results {
+  width: 50rem;
+  margin: 0 auto;
+}
+
+#search-widget ul a {
+  display: block;
+  margin: 1rem;
+}
+
+#search-results {
+  background-color: rgb(230, 230, 230);
+  z-index: 9999;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+#welcome-user {
+  text-align: center;
+  margin: 4rem auto;
+}
+
+.container {
+  width: 100%;
+}
+
+.container h4 {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.container img {
+  height: 10rem;
+  display: block;
+  margin: 0 auto;
+}
+
+ul#friends-list, ul#friend-requests {
+  margin: 0 auto;
+  text-align: center;
+  height: 25rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#friends-list li {
+  list-style: none;
+  text-align: center;
+  width: 15rem;
+  margin: 1.25rem;
+  display: inline-block;
+}
+
+#friend-requests li {
+  list-style: none;
+  text-align: center;
+  display: inline-block;
+  margin: 2rem;
+}
+
+#friend-requests #accept-friend, #friend-requests #reject-friend {
+  padding: .5rem;
+  font-size: 1.25rem;
+  margin: 1rem;
+}
+
+#accept-friend {
+  background-color: rgb(134, 184, 149);
+  color: rgb(14, 71, 32);
+}
+
+#reject-friend {
+  background-color: rgb(184, 134, 134);
+  color: rgb(71, 14, 14);
+}
+
+#decision-buttons {
+  margin: 1rem;
+  display: block;
+}
+
+#friend-recommendations {
+  margin: 3rem;
+  text-align: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#friend-recommendations li {
+  list-style: none;
+  text-align: center;
+  display: inline-block;
+  margin: 2rem;
+}
+
 /* -- CHAT -- */
-p.deck {
-    font-size: 2.5rem;
-    font-weight: 200;
+#conversation-page {
+  width: 85%;
+  margin: 0 auto;
 }
 
-p.deck a {
-    text-decoration: none;
+#convos-list li {
+  list-style: none;
 }
 
-.quiet {
-    font-size: 90%;
-    color: #999;
+#convos-list {
+  margin-top: 5rem;
+  height: 35rem;
+  overflow-y: auto;
+}
+
+#chat tbody, #chat tfoot {
+  display: block;
+}
+
+#chat tfoot #convo-input #message {
+  width: 50rem;
+}
+
+#chat tbody {
+  height: 35rem;
+  overflow-y: auto;
 }

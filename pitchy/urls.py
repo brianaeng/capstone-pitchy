@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^profile/edit/$', views.UpdateProfileView.as_view(), name='update_profile'),
     url(r'^profile/(?P<pk>\d+)/$', views.ProfileView.as_view(), name='profile'),
     url(r'^friendship/confirm/(?P<pk>\d+)/', views.confirm_friend, name='confirmation'),
+    url(r'^friendship/reject/(?P<pk>\d+)/', views.reject_friend, name='rejection'),
     url(r'^friendship/request/(?P<pk>\d+)/', views.request_friend, name='request_friend'),
     url(r'^search/$', views.search, name='search'),
     url(r'^messages/$', views.recent_messages, name='messages'),
