@@ -1,0 +1,12 @@
+branch-defaults:
+  master:
+    environment: pitchy2-dev
+global:
+  application_name: pitchy2
+  branch: null
+  default_ec2_keyname: aws-pitchy2
+  default_platform: Python 2.7
+  default_region: us-west-2
+  profile: eb-cli
+  repository: null
+  sc: git
