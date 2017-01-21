@@ -13,10 +13,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
-import dj_database_url
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
