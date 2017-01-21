@@ -52,7 +52,7 @@ a:hover {
 
 #other-nav a {
   margin: 1rem;
-  font-size: 2.25rem;
+  font-size: 2rem;
 }
 
 /* -- GENERAL ALERTS -- */
@@ -232,8 +232,12 @@ a:hover {
 
 .container img {
   height: 10rem;
+  width: 10rem;
   display: block;
   margin: 0 auto;
+  object-fit: cover;
+  border: solid rgba(221, 221, 221, 0) 1px;
+  border-radius: 50%;
 }
 
 ul#friends-list, ul#friend-requests {
