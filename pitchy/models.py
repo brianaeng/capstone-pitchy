@@ -13,6 +13,15 @@ class Focus(models.Model):
     def __str__(self):
         return self.name
 
+def upload_avatar_to(instance, filename):
+    import os
+    from django.utils.timezone import now
+    filename_base, filename_ext = os.path.splitext(filename)
+    return 'profiles/%s%s' % (
+        now().strftime("%Y%m%d%H%M%S"),
+        filename_ext.lower(),
+    )
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     pic = models.ImageField(upload_to=upload_avatar_to)
@@ -24,15 +33,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-    def upload_avatar_to(instance, filename):
-        import os
-        from django.utils.timezone import now
-        filename_base, filename_ext = os.path.splitext(filename)
-        return 'profiles/%s%s' % (
-            now().strftime("%Y%m%d%H%M%S"),
-            filename_ext.lower(),
-        )
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
