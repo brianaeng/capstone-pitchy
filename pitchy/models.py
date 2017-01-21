@@ -15,7 +15,7 @@ class Focus(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    pic = models.ImageField(blank=True)
+    pic = models.ImageField()
     bio = models.TextField()
     social_handle = models.CharField(max_length=20)
     company = models.CharField(max_length=50)
