@@ -30,8 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['getpitchy.herokuapp.com', 'www.getpitchy.com']
-
+ALLOWED_HOSTS = ['localhost', 'getpitchy.herokuapp.com', 'www.getpitchy.com']
 
 # Application definition
 
@@ -39,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'pitchy',
     'channels',
+    'storages',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -134,6 +134,10 @@ USE_TZ = True
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_ACCESS_KEY_ID = os.environ.get('S3_ACCESS_KEY_ID')
+AWS_S3_SECRET_ACCESS_KEY = os.environ.get('S3_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
 
 LOGIN_REDIRECT_URL = 'homepage'
 
