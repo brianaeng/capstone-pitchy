@@ -290,7 +290,7 @@ ul#friends-list, ul#friend-requests {
 }
 
 #friend-recommendations {
-  margin: 3rem;
+  margin: 1rem;
   text-align: center;
   overflow-y: auto;
   overflow-x: hidden;
