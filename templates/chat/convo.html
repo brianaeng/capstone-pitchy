@@ -51,7 +51,7 @@
             <tr>
               <td id="convo-input">
                 <input id="message" type="text" placeholder="message">
-                <input id="handle" type="hidden" value="{{ request.user.username }}">
+                <input id="handle" type="hidden" value="{{ request.user.first_name }}">
                 <button type="submit" id="go">Send</button>
               </td>
             </tfoot>
