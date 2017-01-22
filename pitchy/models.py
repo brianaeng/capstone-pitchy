@@ -58,6 +58,7 @@ class Friendship(models.Model):
 
 class Conversation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     label = models.SlugField(unique=True)
     user1 = models.ForeignKey(User, related_name="user_one")
     user2 = models.ForeignKey(User, related_name="user_two")

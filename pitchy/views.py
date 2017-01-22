@@ -148,7 +148,7 @@ class CreateChatView(LoginRequiredMixin, FormView):
     #This should output a form that allows the user to choose the receiver(s) and the message body.
     def get(self, request):
         friendships = Friendship.objects.exclude(confirmed=False).filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
-        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user)).order_by('-updated_at')
 
 
         #Profiles of pending/confirmed friends for current user
@@ -198,7 +198,7 @@ def chat_room(request, label):
     convo = Conversation.objects.get(label=label)
 
     if convo.user1 == request.user or convo.user2 == request.user:
-        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user)).order_by('-updated_at')
 
         # We want to show the last 50 messages, ordered most-recent-last
         messages = reversed(convo.messages.order_by('-sent_at')[:50])
@@ -209,12 +209,12 @@ def chat_room(request, label):
 
 #Linked in the main nav bar (Messages) w/ the purpose of redirecting to the most recent conversation
 def recent_messages(request):
-    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+    conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user)).order_by('-updated_at')
 
     if not conversations:
-        return redirect('connections') #Replace this once create conversations page is made
+        return redirect('create_chat') #Replace this once create conversations page is made
     else:
-        last_convo = conversations.last()
+        last_convo = conversations.first()
         label = last_convo.label
         return redirect(chat_room, label=label)
 

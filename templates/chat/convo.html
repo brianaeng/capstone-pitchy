@@ -9,6 +9,9 @@
         <div id="convos-list">
           <h5>Conversations</h5>
           <ul>
+            <li id="create-convo">
+              <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
+            </li>
             {% for conversation in conversations %}
             <li id="single-convo">
               {% if conversation.user1 == request.user %}
@@ -18,9 +21,6 @@
               {% endif %}
             </li>
             {% endfor %}
-            <li id="create-convo">
-              <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
-            </li>
           </ul>
         </div>
       </div>

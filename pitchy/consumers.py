@@ -20,6 +20,7 @@ def ws_receive(message):
     room = Conversation.objects.get(label=label)
     data = json.loads(message['text'])
     m = room.messages.create(sender=data['sender'], body=data['body'])
+    room.save()
     Group('chat-'+label).send({'text': json.dumps(m.as_dict())})
 
 # @channel_session_user
