@@ -23,9 +23,9 @@
           {% for row in friends %}
             <li>
               {% if row.friend != user %}
-                <a href="{% url 'profile' pk=row.friend.profile.id %}"><img src="{{ row.friend.profile.pic.url }}"></img>{{ row.friend.username }}</a>
+                <a href="{% url 'profile' pk=row.friend.profile.id %}"><img src="{{ row.friend.profile.pic.url }}"></img>{{ row.friend.first_name }} {{ row.friend.last_name }}</a>
               {% elif row.user != user %}
-                <a href="{% url 'profile' pk=row.user.profile.id %}"><img src="{{ row.user.profile.pic.url }}"></img>{{ row.user.username }}</a>
+                <a href="{% url 'profile' pk=row.user.profile.id %}"><img src="{{ row.user.profile.pic.url }}"></img>{{ row.user.first_name }} {{ row.user.last_name }}</a>
               {% endif %}
             </li>
           {% endfor %}
@@ -37,7 +37,7 @@
         <ul id="friend-requests">
           {% for row in friend_requests %}
             <li>
-              <a href="{% url 'profile' pk=row.user.id %}"><img src="{{ row.user.profile.pic.url }}"></img>{{ row.user.username }}</a>
+              <a href="{% url 'profile' pk=row.user.id %}"><img src="{{ row.user.profile.pic.url }}"></img>{{ row.user.first_name}} {{ row.user.last_name}}</a>
               <div id="decision-buttons">
                 <a href="{% url 'confirmation' pk=row.pk %}" id="accept-friend">Accept</a>
                 <a href="{% url 'rejection' pk=row.pk %}" id="reject-friend">Reject</a>
@@ -61,7 +61,7 @@
             <li id="recommendation-item">
               <a href="{% url 'profile' pk=person.id %}">
                 <img src="{{ person.pic.url }}"></img>
-                {{ person.user.username }}
+                {{ person.user.first_name }} {{ person.user.last_name }}
               </a>
             </li>
           {% endfor %}

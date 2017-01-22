@@ -52,7 +52,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         if this_friendship and this_friendship.confirmed:
             convo = Conversation.objects.filter(Q(user1=request.user, user2=profile.user) | Q(user1=profile.user, user2=request.user)).first()
 
-            #This is inefficient in the longrun bc it creates a conversation for EVERY friendship if the profile page is accessed a friend, instead of the user actively making the conversation
             if convo == None:
                 url = True
             else:
@@ -164,6 +163,11 @@ class CreateChatView(LoginRequiredMixin, FormView):
     #This should create a new chat(s) with message to receiver(s) or add message to pre-established chat with receiver
     def post(self, request):
         # search_text = request.POST['search_text']
+        post_info = request.POST
+        print "THIS IS INFO"
+        print request.POST.getlist('recipients')
+        print request.POST.getlist('recipients')[0]
+        print post_info['body']
 
         return redirect(recent_messages)
 

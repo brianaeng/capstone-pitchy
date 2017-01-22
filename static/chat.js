@@ -11,7 +11,7 @@ $(function() {
       var ele = $('<tr></tr>');
 
       ele.append(
-        $("<td></td>").text(data.sent_at)
+        $("<td></td>").text(data.formatted_timestamp)
       );
       ele.append(
         $("<td></td>").text(data.sender)

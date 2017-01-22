@@ -308,6 +308,15 @@ ul#friends-list, ul#friend-requests {
   list-style: none;
 }
 
+#single-convo {
+  background-color: rgb(235, 235, 235);
+  padding: 1rem;
+}
+
+#single-convo a {
+  color: black;
+}
+
 #convos-list {
   margin-top: 5rem;
   height: 35rem;

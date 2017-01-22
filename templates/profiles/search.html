@@ -2,7 +2,7 @@
 {% block content %}
 {% if users.count > 0 %}
   {% for user in users %}
-    <a href="{% url 'profile' pk=user.profile.pk %}">{{ user.username }}</a>
+    <a href="{% url 'profile' pk=user.profile.pk %}">{{ user.first_name }} {{ user.last_name }}</a>
   {% endfor %}
 {% else %}
   <p>

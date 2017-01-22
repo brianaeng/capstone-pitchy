@@ -187,5 +187,6 @@ LOGGING = {
     },
 }
 
-import dj_database_url
-DATABASES = {'default': dj_database_url.config()}
+#Comment out if running locally
+# import dj_database_url
+# DATABASES = {'default': dj_database_url.config()}

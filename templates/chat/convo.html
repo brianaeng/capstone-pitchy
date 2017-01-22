@@ -8,9 +8,13 @@
         <div id="convos-list">
           <ul>
             {% for conversation in conversations %}
-              <li>
-                <a href="{% url 'chat' label=conversation.label %}">{{ conversation }}</a>
-              </li>
+            <li id="single-convo">
+              {% if conversation.user1 == request.user %}
+                  <a href="{% url 'chat' label=conversation.label %}">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
+              {% else %}
+                  <a href="{% url 'chat' label=conversation.label %}">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
+              {% endif %}
+            </li>
             {% endfor %}
           </ul>
         </div>
