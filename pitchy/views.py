@@ -163,11 +163,23 @@ class CreateChatView(LoginRequiredMixin, FormView):
     #This should create a new chat(s) with message to receiver(s) or add message to pre-established chat with receiver
     def post(self, request):
         # search_text = request.POST['search_text']
-        post_info = request.POST
-        print "THIS IS INFO"
-        print request.POST.getlist('recipients')
-        print request.POST.getlist('recipients')[0]
-        print post_info['body']
+        message = request.POST['body']
+        recipients = request.POST.getlist('recipients')
+        current_user_convos = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+
+
+        for person in recipients:
+            person_object = User.objects.get(pk=person)
+
+            if current_user_convos.filter(user1=person_object).exists():
+                conversation = current_user_convos.get(user1=person_object)
+            elif current_user_convos.filter(user2=person_object).exists():
+                conversation = current_user_convos.get(user2=person_object)
+            else:
+                label = haikunator.haikunate()
+                conversation = Conversation.objects.create(user1=request.user, user2=person_object, label=label)
+
+            conversation.messages.create(sender=request.user.first_name, body=message)
 
         return redirect(recent_messages)
 

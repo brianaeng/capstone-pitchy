@@ -46,6 +46,10 @@ a:hover {
   margin: .75rem 0 1rem 0;
 }
 
+#site-nav a:hover {
+  opacity: 1;
+}
+
 #other-nav {
   margin: 2.5rem 0;
   float: right;
@@ -318,12 +322,21 @@ ul#friends-list, ul#friend-requests {
   text-transform: none;
 }
 
-#single-convo a:hover {
-  opacity: 1;
+#single-convo a:hover, #create-convo a:hover {
+  opacity: .75;
+}
+
+#create-convo a {
+  color: black;
+  background-color: rgb(185, 185, 185);
+  width: 30rem;
+  border-radius: 0;
+  border: none;
+  text-transform: none;
 }
 
 #convos-list {
-  margin-top: 5rem;
+  /*margin-top: 5rem;*/
   height: 35rem;
   overflow-y: auto;
 }

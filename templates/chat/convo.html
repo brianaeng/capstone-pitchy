@@ -7,6 +7,7 @@
       <!-- <div class="five columns"> -->
       <div class="convo-listing">
         <div id="convos-list">
+          <h5>Conversations</h5>
           <ul>
             {% for conversation in conversations %}
             <li id="single-convo">
@@ -17,6 +18,9 @@
               {% endif %}
             </li>
             {% endfor %}
+            <li id="create-convo">
+              <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
+            </li>
           </ul>
         </div>
       </div>

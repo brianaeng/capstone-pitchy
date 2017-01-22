@@ -8,14 +8,14 @@
     <select multiple="multiple" id="recipient_options" name="recipients" required>
       {% for user in users %}
         <option value="{{ user.pk }}">
-          {{ user.username }}
+          {{ user.first_name }} {{ user.last_name }}
         </option>
       {% endfor %}
     </select>
 
     <!-- GET MESSAGE -->
     <label for="message_body">Message:</label>
-    <input id="message_body" name="body" type="text" />
+    <input id="message_body" name="body" type="text" required/>
 
     <button type="submit">Send</button>
   </form>
