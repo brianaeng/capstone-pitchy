@@ -148,6 +148,8 @@ class CreateChatView(LoginRequiredMixin, FormView):
     #This should output a form that allows the user to choose the receiver(s) and the message body.
     def get(self, request):
         friendships = Friendship.objects.exclude(confirmed=False).filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
+        conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user))
+
 
         #Profiles of pending/confirmed friends for current user
         users = []
@@ -158,7 +160,7 @@ class CreateChatView(LoginRequiredMixin, FormView):
             else:
                 users.append(friendship.friend)
 
-        return render(request, self.template_name, {'users': users})
+        return render(request, self.template_name, {'users': users, 'conversations': conversations})
 
     #This should create a new chat(s) with message to receiver(s) or add message to pre-established chat with receiver
     def post(self, request):

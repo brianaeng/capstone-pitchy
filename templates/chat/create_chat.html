@@ -1,23 +1,50 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
-    <!-- GET RECIPIENTS -->
-    <label for="message_receivers">Recipient(s):</label>
-    <select multiple="multiple" id="recipient_options" name="recipients" required>
-      {% for user in users %}
-        <option value="{{ user.pk }}">
-          {{ user.first_name }} {{ user.last_name }}
-        </option>
-      {% endfor %}
-    </select>
+<article id="create-convo-page">
+  <div class="convo-listing">
+    <div id="convos-list">
+      <h5>Conversations</h5>
+      <ul>
+        {% for conversation in conversations %}
+        <li id="single-convo">
+          {% if conversation.user1 == request.user %}
+              <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
+          {% else %}
+              <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
+          {% endif %}
+        </li>
+        {% endfor %}
+        <li id="create-convo">
+          <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-    <!-- GET MESSAGE -->
-    <label for="message_body">Message:</label>
-    <input id="message_body" name="body" type="text" required/>
+  <div class="create-convo-section">
+    <h5>New Conversation</h5>
 
-    <button type="submit">Send</button>
-  </form>
+    <form method="post" id="create-convo-form">
+      {% csrf_token %}
+      <!-- GET RECIPIENTS -->
+      <label for="message_receivers">Recipient(s):</label>
+      <select multiple="multiple" id="recipient_options" name="recipients" required>
+        {% for user in users %}
+          <option value="{{ user.pk }}">
+            {{ user.first_name }} {{ user.last_name }}
+          </option>
+        {% endfor %}
+      </select>
+
+      <!-- GET MESSAGE -->
+      <label for="message_body">Message:</label>
+      <input id="message_body" name="body" type="text" required/>
+
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+</article>
 
 {% endblock content %}
