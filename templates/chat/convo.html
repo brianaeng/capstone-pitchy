@@ -3,16 +3,17 @@
 {% block content %}
   {% load static %}
   <article id="conversation-page">
-    <div class="row">
-      <div class="four columns">
+    <!-- <div class="row"> -->
+      <!-- <div class="five columns"> -->
+      <div class="convo-listing">
         <div id="convos-list">
           <ul>
             {% for conversation in conversations %}
             <li id="single-convo">
               {% if conversation.user1 == request.user %}
-                  <a href="{% url 'chat' label=conversation.label %}">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
+                  <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
               {% else %}
-                  <a href="{% url 'chat' label=conversation.label %}">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
+                  <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
               {% endif %}
             </li>
             {% endfor %}
@@ -20,7 +21,8 @@
         </div>
       </div>
 
-      <div class="eight columns">
+      <!-- <div class="seven columns"> -->
+      <div class="convo-form">
         {% if convo.user1 != request.user %}
           <h5>Conversation with {{ convo.user1.first_name }} {{ convo.user1.last_name }}</h5>
         {% else %}
@@ -29,11 +31,18 @@
 
         <form id="chatform">
           <table id="chat">
-            <tbody>
+            <tbody id="scroll">
               {% for message in messages %}
                 <tr>
-                  <td>{{ message.formatted_timestamp }}</td>
-                  <td>{{ message.sender }}</td>
+                  <td class="convo-details">
+                    <div id="time">
+                      {{ message.formatted_timestamp }}
+                    </div>
+                    <div id="sender">
+                      {{ message.sender }}
+                    </div>
+                  </td>
+                  <!-- <td class="convo-sender">{{ message.sender }}</td> -->
                   <td>{{ message.body }}</td>
                 </tr>
               {% endfor %}
@@ -50,7 +59,7 @@
         </form>
       </div>
 
-    </div>
+    <!-- </div> -->
 
   </article>
 {% endblock content %}

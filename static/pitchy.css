@@ -1,6 +1,7 @@
 /* -- GENERAL - BASE.HTML -- */
 body {
   font-family: 'Open Sans', sans-serif;
+  letter-spacing: .1rem;
 }
 
 .content {
@@ -124,7 +125,7 @@ a:hover {
 
 /* -- UPDATE PROFILE PAGE -- */
 #update-profile {
-  margin: 4rem auto;
+  margin: 1rem auto;
   width: 50%;
   text-align: center;
 }
@@ -218,7 +219,7 @@ a:hover {
 
 #welcome-user {
   text-align: center;
-  margin: 4rem auto;
+  margin: 1rem auto;
 }
 
 .container {
@@ -301,20 +302,24 @@ ul#friends-list, ul#friend-requests {
 /* -- CHAT -- */
 #conversation-page {
   width: 85%;
-  margin: 0 auto;
+  margin: 1rem auto;
 }
 
 #convos-list li {
   list-style: none;
 }
 
-#single-convo {
-  background-color: rgb(235, 235, 235);
-  padding: 1rem;
-}
-
 #single-convo a {
   color: black;
+  background-color: rgb(235, 235, 235);
+  width: 30rem;
+  border-radius: 0;
+  border: none;
+  text-transform: none;
+}
+
+#single-convo a:hover {
+  opacity: 1;
 }
 
 #convos-list {
@@ -334,4 +339,23 @@ ul#friends-list, ul#friend-requests {
 #chat tbody {
   height: 35rem;
   overflow-y: auto;
+}
+
+.convo-details div {
+  font-size: 1.25rem;
+  display: block;
+}
+
+.convo-form, .convo-listing {
+  display: inline-block;
+}
+
+.convo-listing {
+  width: 30%;
+  float: left;
+}
+
+.convo-form {
+  width: 60%;
+  float: right;
 }

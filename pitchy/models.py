@@ -4,7 +4,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import uuid
+from datetime import datetime
+from pytz import timezone
+import pytz
 
 # Create your models here.
 class Focus(models.Model):
@@ -79,7 +81,12 @@ class DirectMessage(models.Model):
 
     @property
     def formatted_timestamp(self):
-        return self.sent_at.strftime('%m/%-d %-I:%M %p')
+        timestamp_format = '%m/%-d %-I:%M %p'
+        date = self.sent_at.astimezone(timezone('US/Pacific'))
+
+        return date.strftime(timestamp_format)
+
+        # return self.sent_at.strftime('%m/%-d %-I:%M %p')
 
     def as_dict(self):
         return {'sender': self.sender, 'body': self.body, 'sent_at': self.formatted_timestamp}
