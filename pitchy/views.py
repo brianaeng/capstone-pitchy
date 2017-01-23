@@ -143,7 +143,7 @@ class ConnectionsView(LoginRequiredMixin, TemplateView):
             users = focus.profile_set.all().exclude(id=user_profile.id)
 
             #Cross reference focus users with current user's friends
-            recommendations = list(set(users) - set(profiles))
+            recommendations = (list(set(users) - set(profiles)))[:5]
         else:
             recommendations = []
 
