@@ -485,7 +485,18 @@ ul#friends-list, ul#friend-requests {
     position:relative;
     top:5px;
   }
+
+  #other-nav span {
+    margin-bottom: 1rem;
+  }
 }
+
+@media only screen and (min-width: 0px) and (max-width: 549px) {
+  #site-nav {
+    margin-top: 1.5rem;
+  }
+}
+
 
 @media only screen and (min-width: 800px) and (max-width: 1600px) {
   span#nav-connections:after {
