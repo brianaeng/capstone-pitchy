@@ -15,13 +15,13 @@
         <h1 id="site-nav"><a href="/">Pitchy</a></h1>
         <nav id="other-nav">
           {% if request.user.is_authenticated %}
-            <a href="/connections">Connections</a>
-            <a href="/messages">Messages</a>
-            <a href="{% url 'update_profile' %}">Profile</a>
-            <a href="/logout">Sign Out</a>
+            <a href="/connections"><span id="nav-connections"></span></a>
+            <a href="/messages"><span id="nav-messages"></span></a>
+            <a href="{% url 'update_profile' %}"><span id="nav-profile"></span></a>
+            <a href="/logout"><span id="nav-sign-out"></span></a>
           {% else %}
-            <a href="/login">LOG IN</a>
-            <a href="/signup">SIGN UP</a>
+            <a href="/login"><span id="nav-log-in"></span></a>
+            <a href="/signup"><span id="nav-sign-up"></span></a>
           {% endif %}
         </nav>
       </div>
