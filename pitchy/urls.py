@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^friendship/confirm/(?P<pk>\d+)/', views.confirm_friend, name='confirmation'),
     url(r'^friendship/reject/(?P<pk>\d+)/', views.reject_friend, name='rejection'),
     url(r'^friendship/request/(?P<pk>\d+)/', views.request_friend, name='request_friend'),
+    url(r'^friendship/delete/(?P<pk>\d+)/', views.delete_friend, name='delete_friend'),
     url(r'^search/$', views.search, name='search'),
     url(r'^messages/$', views.recent_messages, name='messages'),
     url(r'^new_chat/(?P<pk>\d+)', views.start_chat, name='new_chat'),

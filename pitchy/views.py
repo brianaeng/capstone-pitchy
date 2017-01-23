@@ -237,6 +237,13 @@ def request_friend(request, pk):
     Friendship.objects.create(user=request.user, friend=person, confirmed=False)
     return redirect('profile', pk=pk)
 
+#Button on a given Profile page (if friends already) w/ purpose of unfriending the other person
+def delete_friend(request, pk):
+    friend = User.objects.get(pk=pk)
+    friendship = Friendship.objects.get(Q(user=request.user, friend=friend) | Q(friend=friend, user=request.user))
+    friendship.delete()
+    return redirect('connections')
+
 #Search bar on the top of the Connections page w/ the purpose of giving search results
 def search(request):
     if request.method == 'POST':
