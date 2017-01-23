@@ -3,67 +3,61 @@
 {% block content %}
   {% load static %}
   <article id="conversation-page">
-    <!-- <div class="row"> -->
-      <!-- <div class="five columns"> -->
-      <div class="convo-listing">
-        <div id="convos-list">
-          <h5>Conversations</h5>
-          <ul>
-            <li id="create-convo">
-              <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
-            </li>
-            {% for conversation in conversations %}
-            <li id="single-convo">
-              {% if conversation.user1 == request.user %}
-                  <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
-              {% else %}
-                  <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
-              {% endif %}
-            </li>
+    <div class="convo-listing">
+      <div id="convos-list">
+        <h5>Conversations</h5>
+        <ul>
+          <li id="create-convo">
+            <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
+          </li>
+          {% for conversation in conversations %}
+          <li id="single-convo">
+            {% if conversation.user1 == request.user %}
+                <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
+            {% else %}
+                <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="convo-form">
+      {% if convo.user1 != request.user %}
+        <h5>Conversation with {{ convo.user1.first_name }} {{ convo.user1.last_name }}</h5>
+      {% else %}
+        <h5>Conversation with {{ convo.user2.first_name }} {{ convo.user2.last_name }}</h5>
+      {% endif %}
+
+      <form id="chatform">
+        <table id="chat">
+          <tbody id="scroll">
+            {% for message in messages %}
+              <tr>
+                <td class="convo-details">
+                  <div id="time">
+                    {{ message.formatted_timestamp }}
+                  </div>
+                  <div id="sender">
+                    {{ message.sender }}
+                  </div>
+                </td>
+                <td>{{ message.body }}</td>
+              </tr>
             {% endfor %}
-          </ul>
-        </div>
-      </div>
-
-      <!-- <div class="seven columns"> -->
-      <div class="convo-form">
-        {% if convo.user1 != request.user %}
-          <h5>Conversation with {{ convo.user1.first_name }} {{ convo.user1.last_name }}</h5>
-        {% else %}
-          <h5>Conversation with {{ convo.user2.first_name }} {{ convo.user2.last_name }}</h5>
-        {% endif %}
-
-        <form id="chatform">
-          <table id="chat">
-            <tbody id="scroll">
-              {% for message in messages %}
-                <tr>
-                  <td class="convo-details">
-                    <div id="time">
-                      {{ message.formatted_timestamp }}
-                    </div>
-                    <div id="sender">
-                      {{ message.sender }}
-                    </div>
-                  </td>
-                  <!-- <td class="convo-sender">{{ message.sender }}</td> -->
-                  <td>{{ message.body }}</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-            <tfoot>
-            <tr>
-              <td id="convo-input">
-                <input id="message" type="text" placeholder="message">
-                <input id="handle" type="hidden" value="{{ request.user.first_name }}">
-                <button type="submit" id="go">Send</button>
-              </td>
-            </tfoot>
-          </table>
-        </form>
-      </div>
-
-    <!-- </div> -->
+          </tbody>
+          <tfoot>
+          <tr>
+            <td id="convo-input">
+              <input id="message" type="text" placeholder="message">
+              <input id="handle" type="hidden" value="{{ request.user.first_name }}">
+              <button type="submit" id="go">Send</button>
+            </td>
+          </tfoot>
+        </table>
+      </form>
+    </div>
 
   </article>
 {% endblock content %}
