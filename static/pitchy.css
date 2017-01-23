@@ -313,13 +313,18 @@ ul#friends-list, ul#friend-requests {
   list-style: none;
 }
 
-#single-convo a {
+#single-convo a, #create-convo a {
   color: black;
-  background-color: rgb(235, 235, 235);
-  width: 30rem;
+  width: 20vw;
+  padding-left: .5rem;
+  padding-right: .5rem;
   border-radius: 0;
   border: none;
   text-transform: none;
+}
+
+#single-convo a {
+  background-color: rgb(235, 235, 235);
 }
 
 #single-convo a:hover, #create-convo a:hover {
@@ -327,12 +332,7 @@ ul#friends-list, ul#friend-requests {
 }
 
 #create-convo a {
-  color: black;
   background-color: rgb(185, 185, 185);
-  width: 30rem;
-  border-radius: 0;
-  border: none;
-  text-transform: none;
 }
 
 #convos-list {
@@ -345,7 +345,7 @@ ul#friends-list, ul#friend-requests {
 }
 
 #chat tfoot #convo-input #message {
-  width: 50rem;
+  width: 29vw;
 }
 
 #chat tbody {
@@ -363,13 +363,30 @@ ul#friends-list, ul#friend-requests {
 }
 
 .convo-listing {
-  width: 30%;
-  float: left;
+  width: 25vw;
+  text-align: center;
 }
 
 .convo-form, .create-convo-section {
-  width: 60%;
+  width: 45vw;
+  text-align: center;
+  margin: 0 auto;
   float: right;
+  height: auto;
+}
+
+.convo-form form {
+  margin: 0 auto;
+  width: 43vw;
+}
+
+table#chat {
+  margin: 0 auto;
+}
+
+#create-convo-form {
+  text-align: left;
+  margin-left: 1rem;
 }
 
 #create-convo-form select#recipient_options {
@@ -436,7 +453,6 @@ ul#friends-list, ul#friend-requests {
     margin-top: 1.5rem;
   }
 }
-
 
 @media only screen and (min-width: 800px) and (max-width: 1600px) {
   span#nav-connections:after {
