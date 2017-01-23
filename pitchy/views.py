@@ -248,7 +248,7 @@ def request_friend(request, pk):
 #Button on a given Profile page (if friends already) w/ purpose of unfriending the other person
 def delete_friend(request, pk):
     friend = User.objects.get(pk=pk)
-    friendship = Friendship.objects.get(Q(user=request.user, friend=friend) | Q(friend=friend, user=request.user))
+    friendship = Friendship.objects.get(Q(user=request.user, friend=friend) | Q(user=friend, friend=request.user))
 
     try:
         conversation = Conversation.objects.get(Q(user1=request.user, user2=friend) | Q(user1=friend, user2=request.user))
