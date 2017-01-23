@@ -7,6 +7,8 @@ from django.views.generic import TemplateView, FormView
 from django.db.models import Q
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
+
 import random
 
 import string
@@ -241,6 +243,13 @@ def request_friend(request, pk):
 def delete_friend(request, pk):
     friend = User.objects.get(pk=pk)
     friendship = Friendship.objects.get(Q(user=request.user, friend=friend) | Q(friend=friend, user=request.user))
+
+    try:
+        conversation = Conversation.objects.get(Q(user1=request.user, user2=friend) | Q(user1=friend, user2=request.user))
+        conversation.delete()
+    except ObjectDoesNotExist:
+        pass
+
     friendship.delete()
     return redirect('connections')
 
