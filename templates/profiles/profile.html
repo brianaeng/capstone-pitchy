@@ -20,7 +20,9 @@
             <a href="{% url 'chat' label=url %}">Send Message</a>
           {% endif %}
         {% endif %}
-        <a href="{% url 'delete_friend' pk=profile.user.pk %}">Unfriend</a>
+        {% if confirmed_boolean %}
+          <a href="{% url 'delete_friend' pk=profile.user.pk %}">Unfriend</a>
+        {% endif %}
       {% else %}
         <a href="{% url 'request_friend' pk=profile.user.pk %}">Request Friend</a>
       {% endif %}

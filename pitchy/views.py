@@ -41,17 +41,23 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         #See if profile user is friends with current user
         current_user_friends = Friendship.objects.filter(Q(user_id=request.user.id) | Q(friend_id=request.user.id))
         boolean = False
+        confirmed_boolean = False
         this_friendship = None
         for friendship in current_user_friends:
             if friendship.user == profile.user or friendship.friend == profile.user:
                 this_friendship = friendship
+
                 boolean = True
+
+                if this_friendship.confirmed:
+                    confirmed_boolean = True
+
                 break
 
         #Build correct URL for chat based on 1) if confirmed friends & 2) if chat already exists
         url = None
 
-        if this_friendship and this_friendship.confirmed:
+        if this_friendship and confirmed_boolean:
             convo = Conversation.objects.filter(Q(user1=request.user, user2=profile.user) | Q(user1=profile.user, user2=request.user)).first()
 
             if convo == None:
@@ -65,7 +71,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         else:
             role = "Journalist"
 
-        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean, 'url': url})
+        return render(request, self.template_name, {'profile': profile, 'role': role, 'boolean': boolean, 'confirmed_boolean': confirmed_boolean, 'url': url})
 
 class UpdateProfileView(LoginRequiredMixin, FormView):
     template_name = 'profiles/update_profile.html'
