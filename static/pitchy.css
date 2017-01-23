@@ -336,7 +336,6 @@ ul#friends-list, ul#friend-requests {
 }
 
 #convos-list {
-  /*margin-top: 5rem;*/
   height: 35rem;
   overflow-y: auto;
 }
@@ -390,100 +389,41 @@ ul#friends-list, ul#friend-requests {
 /*-- MEDIA QUERIES --*/
 
 @media only screen and (min-width: 0px) and (max-width: 799px) {
-  span#nav-connections:after {
+  span:after {
     content: "";
-    background-image: url(home.png);
     background-size: 100% 100%;
     display: inline-block;
     -webkit-filter: invert(100%);
 
-    /*size of your image*/
     height: 3rem;
     width: 3rem;
 
-    /*if you want to change the position you can use margins or:*/
-    position:relative;
-    top:5px;
+    position: relative;
+    top: 5px;
+  }
+
+  span#nav-connections:after {
+    background-image: url(home.png);
   }
 
   span#nav-messages:after {
-    content: "";
     background-image: url(chat.png);
-    background-size: 100% 100%;
-    display: inline-block;
-    -webkit-filter: invert(100%);
-
-    /*size of your image*/
-    height: 3rem;
-    width: 3rem;
-
-    /*if you want to change the position you can use margins or:*/
-    position:relative;
-    top:5px;
   }
 
   span#nav-profile:after {
-    content: "";
     background-image: url(person.png);
-    background-size: 100% 100%;
-    display: inline-block;
-    -webkit-filter: invert(100%);
-
-    /*size of your image*/
-    height: 3rem;
-    width: 3rem;
-
-    /*if you want to change the position you can use margins or:*/
-    position:relative;
-    top:5px;
   }
 
   span#nav-sign-out:after {
-    content: "";
     background-image: url(logout.png);
-    background-size: 100% 100%;
-    display: inline-block;
-    -webkit-filter: invert(100%);
-
-    /*size of your image*/
-    height: 3rem;
-    width: 3rem;
-
-    /*if you want to change the position you can use margins or:*/
-    position:relative;
-    top:5px;
   }
 
   span#nav-log-in:after {
-    content: "";
     background-image: url(login.png);
-    background-size: 100% 100%;
-    display: inline-block;
-    -webkit-filter: invert(100%);
-
-    /*size of your image*/
-    height: 3rem;
-    width: 3rem;
-
-    /*if you want to change the position you can use margins or:*/
-    position:relative;
-    top:5px;
   }
 
   span#nav-sign-up:after {
-    content: "";
     background-image: url(sign-up.png);
-    background-size: 100% 100%;
-    display: inline-block;
-    -webkit-filter: invert(100%);
-
-    /*size of your image*/
-    height: 3rem;
-    width: 3rem;
-
-    /*if you want to change the position you can use margins or:*/
-    position:relative;
-    top:5px;
   }
 
   #other-nav span {

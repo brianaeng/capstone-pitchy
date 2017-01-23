@@ -220,7 +220,7 @@ def recent_messages(request):
     conversations = Conversation.objects.filter(Q(user1=request.user) | Q(user2=request.user)).order_by('-updated_at')
 
     if not conversations:
-        return redirect('create_chat') #Replace this once create conversations page is made
+        return redirect('create_chat')
     else:
         last_convo = conversations.first()
         label = last_convo.label

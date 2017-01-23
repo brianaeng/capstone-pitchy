@@ -8,7 +8,6 @@ from datetime import datetime
 from pytz import timezone
 import pytz
 
-# Create your models here.
 class Focus(models.Model):
     name = models.CharField(max_length=100)
 
@@ -68,13 +67,10 @@ class Conversation(models.Model):
         return output
 
 class DirectMessage(models.Model):
-    #add a read_at?
     sent_at = models.DateTimeField(auto_now_add=True)
     conversation = models.ForeignKey(Conversation, related_name="messages")
-    # sender = models.ForeignKey(User, related_name="message_sender")
     sender = models.TextField()
     body = models.TextField()
-    # attachment = models.FileField(blank=True, )
 
     def __str__(self):
         output = "{}: {}".format(self.sender, self.body)
@@ -86,8 +82,6 @@ class DirectMessage(models.Model):
         date = self.sent_at.astimezone(timezone('US/Pacific'))
 
         return date.strftime(timestamp_format)
-
-        # return self.sent_at.strftime('%m/%-d %-I:%M %p')
 
     def as_dict(self):
         return {'sender': self.sender, 'body': self.body, 'sent_at': self.formatted_timestamp}
