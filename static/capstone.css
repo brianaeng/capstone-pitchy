@@ -362,8 +362,9 @@ ul#friends-list, ul#friend-requests {
 
 /* -- CHAT -- */
 #conversation-page, #create-convo-page {
-  /*width: 85%;*/
-  margin: 1rem auto;
+  margin: 3rem auto;
+  height: auto;
+  text-align: center;
 }
 
 #convos-list li {
@@ -415,26 +416,42 @@ ul#friends-list, ul#friend-requests {
   display: block;
 }
 
-.convo-form, .convo-listing {
+/*.convo-form, .convo-listing {
   display: inline-block;
-}
+}*/
 
 .convo-listing {
-  width: 25vw;
+  /*width: 25vw;*/
+  /*width: 30%;
   text-align: center;
+  display: inline-block;
+  margin: 1rem 0;*/
+  display: inline-block;
+  /*background-color: red;*/
 }
 
 .convo-form, .create-convo-section {
-  width: 45vw;
-  text-align: center;
-  margin: 0 auto;
-  float: right;
-  height: auto;
+  width: 40vw;
+  /*text-align: center;
+  margin: 0 3rem;*/
+  /*float: right;*/
+  /*height: auto;
+  display: inline-block;*/
+  display: inline-block;
+  /*background-color: blue;*/
+  vertical-align: top;
 }
 
 .convo-form form {
-  margin: 0 auto;
-  width: 43vw;
+  /*margin: 0 auto;*/
+  /*width: 43vw;*/
+}
+ .convo-form h5 {
+   margin-bottom: 1rem;
+ }
+
+#convos-list li {
+  margin-bottom: .75rem;
 }
 
 table#chat {
@@ -456,8 +473,9 @@ table#chat {
   width: 30rem;
 }
 
-#create-convo-form button {
-  margin: 1rem;
+a.button {
+  margin-bottom: 0;
+  white-space: normal;
 }
 
 /*-- MEDIA QUERIES --*/
