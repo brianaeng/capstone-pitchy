@@ -303,9 +303,10 @@ h1#homepage-welcome, h4#homepage-intro {
 ul#friends-list, ul#friend-requests {
   margin: 0 auto;
   text-align: center;
-  overflow: auto;
+  overflow-x: scroll;
   white-space: nowrap;
   width: 90rem;
+  height: 20rem;
 }
 
 #friends-list li {
