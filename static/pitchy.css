@@ -298,9 +298,9 @@ h1#homepage-welcome, h4#homepage-intro {
 ul#friends-list, ul#friend-requests {
   margin: 0 auto;
   text-align: center;
-  height: 25rem;
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: 15rem;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 #friends-list li {
