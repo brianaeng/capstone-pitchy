@@ -303,7 +303,8 @@ h1#homepage-welcome, h4#homepage-intro {
 ul#friends-list, ul#friend-requests {
   margin: 0 auto;
   text-align: center;
-  overflow-x: scroll;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   width: 90rem;
   height: 20rem;
@@ -348,8 +349,8 @@ ul#friends-list, ul#friend-requests {
 #friend-recommendations {
   margin: 1rem;
   text-align: center;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 #friend-recommendations li {

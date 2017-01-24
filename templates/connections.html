@@ -46,29 +46,31 @@
           {% endfor %}
         </ul>
       </div>
-
     </div>
 
-    <section id="friend-recommendations">
-      <h4>Recommendations</h4>
-      {% if not recommendations %}
-        <p>
-          Sorry, no recommendations.
-        </p>
-      {% else %}
-        <ul>
-          {% for person in recommendations %}
-            <li id="recommendation-item">
-              <a href="{% url 'profile' pk=person.id %}">
-                <img src="{{ person.pic.url }}"></img>
-                {{ person.user.first_name }} {{ person.user.last_name }}
-              </a>
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    </section>
-
+    <div class="row">
+      <div class="twelve columns">
+        <section id="friend-recommendations">
+          <h4>Recommendations</h4>
+          {% if not recommendations %}
+            <p>
+              Sorry, no recommendations.
+            </p>
+          {% else %}
+            <ul>
+              {% for person in recommendations %}
+                <li id="recommendation-item">
+                  <a href="{% url 'profile' pk=person.id %}">
+                    <img src="{{ person.pic.url }}"></img>
+                    {{ person.user.first_name }} {{ person.user.last_name }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </section>
+      </div>
+    </div>
   </div>
 </article>
 
