@@ -69,6 +69,11 @@ a:hover {
   margin: 0 auto;
 }
 
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+
 /* -- GENERAL ALERTS -- */
 .alert {
     display: block;
@@ -298,9 +303,9 @@ h1#homepage-welcome, h4#homepage-intro {
 ul#friends-list, ul#friend-requests {
   margin: 0 auto;
   text-align: center;
-  height: 15rem;
-  overflow-y: hidden;
-  overflow-x: auto;
+  overflow: auto;
+  white-space: nowrap;
+  width: 90rem;
 }
 
 #friends-list li {
