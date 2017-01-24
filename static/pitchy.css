@@ -5,8 +5,8 @@ body {
 }
 
 .content {
-  padding: 2rem;
-  width: 85%;
+  /*padding: 2rem;
+  width: 85%;*/
   margin: 0 auto;
 }
 
@@ -23,7 +23,6 @@ a:hover {
 .page-header {
   height: 8rem;
   background-color: rgb(130, 130, 130);
-  margin-bottom: 2rem;
 }
 
 .whole-nav {
@@ -60,6 +59,18 @@ a:hover {
   font-size: 2rem;
 }
 
+.profile, #update-profile, #login-page, .registration-form, #connections-page {
+  padding: 2rem;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#conversation-page, #create-convo-page {
+  padding: 2rem;
+  width: 75%;
+  margin: 0 auto;
+}
+
 /* -- GENERAL ALERTS -- */
 .alert {
     display: block;
@@ -92,8 +103,8 @@ a:hover {
 }
 
 /* -- HOMEPAGE.HTML -- */
-#homepage-welcome, #homepage-points, #homepage-intro {
-  margin: 4rem auto;
+ #homepage-points {
+  margin: 2rem auto;
   text-align: center;
 }
 
@@ -104,6 +115,32 @@ a:hover {
 
 #homepage-points div img {
   margin: 1rem;
+}
+
+#intro-banner {
+  background-image:
+  linear-gradient(
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.35)
+  ),
+  url('banner.jpg');
+  background-size: cover;
+  height: 45rem;
+  text-align: center;
+}
+
+h1#homepage-welcome, h4#homepage-intro {
+  margin: 0 auto;
+  width: 80%;
+  color: rgb(255, 255, 255);
+}
+
+#homepage-welcome {
+  padding: 7rem 0 8rem 0;
+}
+
+#homepage-intro {
+  padding: 3rem 0 2rem 0;
 }
 
 /* -- LOG IN/SIGN-UP -- */
@@ -305,7 +342,7 @@ ul#friends-list, ul#friend-requests {
 
 /* -- CHAT -- */
 #conversation-page, #create-convo-page {
-  width: 85%;
+  /*width: 85%;*/
   margin: 1rem auto;
 }
 
