@@ -1,44 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load static %}
 <article class="profile">
-  <h2 id="profile-username">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+  <div class="row">
+  <section id="profile-sidebar" class="six columns">
+    <h2 id="profile-username">{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
 
-  <div id="profile-pic">
-    {% if profile.pic %}
-    <img src="{{ profile.pic.url }}"></img>
-    {% endif %}
-  </div>
+    <div id="profile-pic">
+      <img src="{{ profile.pic.url }}"></img>
+    </div>
 
-  <div id="profile-actions">
-    {% if profile != request.user.profile %}
-      {% if boolean %}
-        {% if url != None %}
-          {% if url == True %}
-            <a href="{% url 'new_chat' pk=profile.user.pk %}">Send Message</a>
-          {% else %}
-            <a href="{% url 'chat' label=url %}">Send Message</a>
+    <div id="profile-actions">
+      {% if profile != request.user.profile %}
+        {% if boolean %}
+          {% if url != None %}
+            {% if url == True %}
+              <a href="{% url 'new_chat' pk=profile.user.pk %}">Send Message</a>
+            {% else %}
+              <a href="{% url 'chat' label=url %}">Send Message</a>
+            {% endif %}
           {% endif %}
+          {% if confirmed_boolean %}
+            <a href="{% url 'delete_friend' pk=profile.user.pk %}">Unfriend</a>
+          {% endif %}
+        {% else %}
+          <a href="{% url 'request_friend' pk=profile.user.pk %}">Request Friend</a>
         {% endif %}
-        {% if confirmed_boolean %}
-          <a href="{% url 'delete_friend' pk=profile.user.pk %}">Unfriend</a>
-        {% endif %}
-      {% else %}
-        <a href="{% url 'request_friend' pk=profile.user.pk %}">Request Friend</a>
       {% endif %}
-    {% endif %}
-  </div>
+    </div>
+    <div id="social">
+      <a href="https://twitter.com/{{ profile.social_handle }}"><img src="{% static 'twitter.png' %}" id="twitter-icon" /></a>
+    </div>
+  </section>
 
-  <div id="profile-list-details">
+  <div id="profile-list-details" class="six columns">
     <ul>
       <li>
         <span class="profile-label">Role:</span> {{ role }} @ {{ profile.company }}
       </li>
       <li>
         <span class="profile-label">Bio:</span> {{ profile.bio }}
-      </li>
-      <li>
-        <span class="profile-label">Twitter:</span> <a href="https://twitter.com/{{ profile.social_handle }}">@{{ profile.social_handle }}</a>
       </li>
       <li>
         <span class="profile-label">Focuses:</span>

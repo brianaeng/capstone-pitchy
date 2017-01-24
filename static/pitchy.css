@@ -5,8 +5,6 @@ body {
 }
 
 .content {
-  /*padding: 2rem;
-  width: 85%;*/
   margin: 0 auto;
 }
 
@@ -190,11 +188,6 @@ h1#homepage-welcome, h4#homepage-intro {
 }
 
 /* -- PROFILE PAGE --*/
-.profile {
-  margin: 4rem auto;
-  width: 80%;
-}
-
 #profile-username, #profile-pic, #profile-actions {
   text-align: center;
   margin: 2rem auto;
@@ -229,8 +222,33 @@ h1#homepage-welcome, h4#homepage-intro {
   margin: 2rem auto;
 }
 
+#profile-sidebar {
+  display: inline-block;
+  margin: 1rem;
+}
+
+#profile-sidebar, #profile-list-details {
+  margin: 0 auto;
+}
+
+#profile-list-details {
+  margin: 4rem 1rem;
+  display: inline-block;
+}
+
+#twitter-icon {
+  width: 5rem;
+  height: auto;
+}
+
+#social {
+  text-align: center;
+}
+
 .profile-label {
   font-size: 1.75rem;
+  font-weight: bold;
+  color: rgb(84, 84, 84);
 }
 
 /* -- CONNECTIONS -- */
