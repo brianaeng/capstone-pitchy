@@ -306,7 +306,6 @@ ul#friends-list, ul#friend-requests {
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-  width: 90rem;
   height: 20rem;
 }
 
@@ -323,10 +322,6 @@ ul#friends-list, ul#friend-requests {
   text-align: center;
   display: inline-block;
   margin: 2rem;
-}
-
-#friend-requests {
-  text-align: center;
 }
 
 #friend-requests #accept-friend, #friend-requests #reject-friend {
@@ -584,5 +579,9 @@ a.button {
 
   span#nav-sign-up:after {
     content: "Sign Up";
+  }
+
+  ul#friends-list, ul#friend-requests {
+    width: 90rem;
   }
 }
