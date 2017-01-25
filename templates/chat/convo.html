@@ -5,7 +5,6 @@
 <article id="conversation-page">
   <div class="convo-listing">
     <div id="convos-list">
-      <!-- <h5>Conversations</h5> -->
       <ul>
         <li id="create-convo">
           <a href="{% url 'create_chat' %}" class="button">New Conversation</a>
@@ -13,9 +12,9 @@
         {% for conversation in conversations %}
         <li id="single-convo">
           {% if conversation.user1 == request.user %}
-              <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</a>
+              <a href="{% url 'chat' label=conversation.label %}" class="button"><span class="one-chat"><img src="{{ conversation.user1.profile.pic.url }}" id="chat-pic-side" /> {{ conversation.user2.first_name }} {{ conversation.user2.last_name }}</span></a>
           {% else %}
-              <a href="{% url 'chat' label=conversation.label %}" class="button">{{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</a>
+              <a href="{% url 'chat' label=conversation.label %}" class="button"><span class="one-chat"><img src="{{ conversation.user2.profile.pic.url }}" id="chat-pic-side" /> {{ conversation.user1.first_name }} {{ conversation.user1.last_name }}</span></a>
           {% endif %}
         </li>
         {% endfor %}
@@ -25,9 +24,9 @@
 
   <div class="convo-form">
     {% if convo.user1 != request.user %}
-      <h5>Conversation with {{ convo.user1.first_name }} {{ convo.user1.last_name }}</h5>
+      <img src="{{ convo.user1.profile.pic.url }}" id="chat-pic-main" /><h5>Conversation with {{ convo.user1.first_name }} {{ convo.user1.last_name }}</h5>
     {% else %}
-      <h5>Conversation with {{ convo.user2.first_name }} {{ convo.user2.last_name }}</h5>
+      <img src="{{ convo.user2.profile.pic.url }}" id="chat-pic-main" /><h5>Conversation with {{ convo.user2.first_name }} {{ convo.user2.last_name }}</h5>
     {% endif %}
 
     <form id="chatform">

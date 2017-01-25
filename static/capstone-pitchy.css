@@ -367,6 +367,23 @@ ul#friends-list, ul#friend-requests {
   text-align: center;
 }
 
+#chat-pic-main {
+  height: 4.5rem;
+  width: 4.5rem;
+  object-fit: cover;
+  border: solid rgba(221, 221, 221, 0) 1px;
+  border-radius: 50%;
+}
+
+#chat-pic-side {
+  height: 3rem;
+  width: 3rem;
+  object-fit: cover;
+  border: solid rgba(221, 221, 221, 0) 1px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
 #convos-list li {
   list-style: none;
 }
@@ -374,11 +391,22 @@ ul#friends-list, ul#friend-requests {
 #single-convo a, #create-convo a {
   color: black;
   width: 20vw;
+  height: 5rem;
+  padding-top: .6rem;
   padding-left: .5rem;
   padding-right: .5rem;
   border-radius: 0;
   border: none;
   text-transform: none;
+}
+
+#single-convo a *, #create-convo a * {
+  vertical-align: middle;
+}
+
+.one-chat {
+  float: left;
+  padding-left: 4rem;
 }
 
 #single-convo a {
