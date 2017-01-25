@@ -523,7 +523,7 @@ a.button {
   list-style: none;
   margin: 2rem auto;
   vertical-align: middle;
-  width: 50vw;
+  width: 50%;
 }
 
 #focus-userlist li img {
@@ -552,7 +552,7 @@ a.button {
 }
 
 #userlist-single {
-  margin-left: 7rem;
+  margin-left: 6rem;
   margin-right: 6rem;
   text-align: left;
 }
