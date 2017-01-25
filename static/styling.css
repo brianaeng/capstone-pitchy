@@ -524,7 +524,7 @@ a.button {
   margin: 3rem auto;
   vertical-align: middle;
   width: 50vw;
-  border-bottom: 1px rgb(199, 199, 199) solid;
+  /*border-bottom: 1px rgb(199, 199, 199) solid;*/
 }
 
 #focus-userlist li img {
@@ -541,6 +541,7 @@ a.button {
   vertical-align: top;
   margin-top: 2.5rem;
   margin-left: 1rem;
+  text-align: left;
 }
 
 #focus-userlist li img {
@@ -549,6 +550,12 @@ a.button {
   object-fit: cover;
   border: solid rgba(221, 221, 221, 0) 1px;
   border-radius: 50%;
+}
+
+#userlist-single {
+  margin-left: 7rem;
+  margin-right: 6rem;
+  text-align: left;
 }
 
 /*-- MEDIA QUERIES --*/

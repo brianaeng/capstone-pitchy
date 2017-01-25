@@ -6,19 +6,21 @@
   <ul id="focus-userlist">
     {% for user in user_set %}
     <li>
-      <a href="{% url 'profile' pk=user.pk %}">
-        <img src="{{ user.pic.url }}" />
+      <div id="userlist-single">
+        <a href="{% url 'profile' pk=user.pk %}">
+          <img src="{{ user.pic.url }}" />
 
-        <div id="user-info">
-          {{ user.user.first_name }} {{ user.user.last_name }}
+          <div id="user-info">
+            {{ user.user.first_name }} {{ user.user.last_name }}
 
-          {% if user.role == "PR" %}
-            <span class="user-role">Public Relations @ {{ user.company }}</span>
-          {% else %}
-            <span class="user-role">Journalist @ {{ user.company }}</span>
-          {% endif %}
-        </div>
-      </a>
+            {% if user.role == "PR" %}
+              <span class="user-role">Public Relations @ {{ user.company }}</span>
+            {% else %}
+              <span class="user-role">Journalist @ {{ user.company }}</span>
+            {% endif %}
+          </div>
+        </a>
+      </div>
     </li>
     {% endfor %}
   </ul>
