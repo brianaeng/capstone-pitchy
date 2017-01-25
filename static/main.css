@@ -368,16 +368,16 @@ ul#friends-list, ul#friend-requests {
 }
 
 #chat-pic-main {
-  height: 4.5rem;
-  width: 4.5rem;
+  height: 5rem;
+  width: 5rem;
   object-fit: cover;
   border: solid rgba(221, 221, 221, 0) 1px;
   border-radius: 50%;
 }
 
 #chat-pic-side {
-  height: 3rem;
-  width: 3rem;
+  height: 3.5rem;
+  width: 3.5rem;
   object-fit: cover;
   border: solid rgba(221, 221, 221, 0) 1px;
   border-radius: 50%;
