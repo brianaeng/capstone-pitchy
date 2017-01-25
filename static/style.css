@@ -277,7 +277,7 @@ h1#homepage-welcome, h4#homepage-intro {
 }
 
 #search-results {
-  background-color: rgb(230, 230, 230);
+  background-color: rgb(255, 255, 255);
   z-index: 9999;
   position: absolute;
   left: 0;
