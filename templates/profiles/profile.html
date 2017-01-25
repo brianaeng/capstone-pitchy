@@ -46,8 +46,8 @@
         <span class="profile-label">Focuses:</span>
         <ul>
           {% for item in profile.focuses.all %}
-            <li id="keep-bullet">
-              {{ item.name }}
+            <li class="user-focus-item">
+              <a href="{% url 'focus_users' pk=item.pk %}">{{ item.name }}</a>
             </li>
           {% endfor %}
         </ul>

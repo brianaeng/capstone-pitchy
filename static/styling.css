@@ -57,7 +57,7 @@ a:hover {
   font-size: 2rem;
 }
 
-.profile, #update-profile, #login-page, .registration-form, #connections-page {
+.profile, #update-profile, #login-page, .registration-form, #connections-page, #focus-users {
   padding: 2rem;
   width: 80%;
   margin: 0 auto;
@@ -222,9 +222,14 @@ h1#homepage-welcome, h4#homepage-intro {
   margin: 3rem auto;
 }
 
-#profile-list-details li:not(#keep-bullet)  {
+#profile-list-details li {
   list-style-type: none;
-  margin: 2rem auto;
+  /*margin: 1rem auto;*/
+  margin-right: 3rem;
+}
+
+#profile-list-details ul {
+  margin-left: 0;
 }
 
 #profile-sidebar {
@@ -249,6 +254,10 @@ h1#homepage-welcome, h4#homepage-intro {
   font-size: 1.75rem;
   font-weight: bold;
   color: rgb(84, 84, 84);
+}
+
+.user-focus-item {
+  display: inline-block;
 }
 
 /* -- CONNECTIONS -- */
@@ -503,6 +512,35 @@ table#chat {
 a.button {
   margin-bottom: 0;
   white-space: normal;
+}
+
+/*-- FOCUS USERS --*/
+#focus-users {
+  text-align: center;
+}
+
+#focus-userlist li {
+  list-style: none;
+  margin: 3rem auto;
+  vertical-align: middle;
+  width: 50vw;
+  border-bottom: 1px rgb(199, 199, 199) solid;
+}
+
+#focus-userlist li img {
+  margin: 2rem 1rem;
+  display: inline-block;
+}
+
+.user-role {
+  display: block;
+}
+
+#user-info {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 2.5rem;
+  margin-left: 1rem;
 }
 
 /*-- MEDIA QUERIES --*/

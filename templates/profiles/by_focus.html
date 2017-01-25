@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<article id="focus-users">
+  <h2>{{ focus.name }}</h2>
+  <ul id="focus-userlist">
+    {% for user in user_set %}
+    <li>
+      <a href="{% url 'profile' pk=user.pk %}">
+        <img src="{{ user.pic.url }}" />
+
+        <div id="user-info">
+          {{ user.user.first_name }} {{ user.user.last_name }}
+
+          {% if user.role == "PR" %}
+            <span class="user-role">Public Relations @ {{ user.company }}</span>
+          {% else %}
+            <span class="user-role">Journalist @ {{ user.company }}</span>
+          {% endif %}
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+
+</article>
+{% endblock content %}

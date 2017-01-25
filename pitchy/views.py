@@ -304,6 +304,16 @@ def delete_friend(request, pk):
     friendship.delete()
     return redirect('connections')
 
+#Display all users for given focus
+def focus_users(request, pk):
+    #Find the focus from the given pk
+    focus = Focus.objects.get(pk=pk)
+
+    #Find the associated users for that focus
+    user_set = focus.profile_set.all()
+
+    return render(request, 'profiles/by_focus.html', {'focus': focus, 'user_set': user_set})
+
 #Search bar on the top of the Connections page w/ the purpose of giving search results
 def search(request):
     #If search post request is made, take the request text, change to lowercase, and set to search_text
