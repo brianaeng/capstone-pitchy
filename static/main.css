@@ -325,6 +325,10 @@ ul#friends-list, ul#friend-requests {
   margin: 2rem;
 }
 
+#friend-requests {
+  text-align: center;
+}
+
 #friend-requests #accept-friend, #friend-requests #reject-friend {
   padding: .5rem;
   font-size: 1.25rem;
