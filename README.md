@@ -17,6 +17,6 @@ Users have all the normal "friending" options (request friend, confirm/reject fr
 
 ##Notes
 I also gained experience in:  
-* **API creation** - Used Django REST Framework to produce an API that ultimately was not utilized (but is still in codebase for reference)
+* **API creation** - I used Django REST Framework to produce an API that ultimately was not utilized (but is still in codebase for reference)
 * **AWS deployment** - Initially I deployed the project via AWS EB but support for websockets was more complex compared to support via Heroku.
 * **Working with new tech** - Django Channels (brings async tasks to Django, aka websocket support) released the same month I worked on this project, so it forced me to look outside my usual approach of tutorials/Stack Overflow for answers.
