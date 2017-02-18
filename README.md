@@ -1,6 +1,6 @@
 #Pitchy
 
-[Pitchy](https://www.getpitchy.com/) is my capstone project for [Ada Developers Academy](http://adadevelopersacademy.org/). It's a social networking site for public relations professionals and journalists to connect. The project was driven by equal parts of wanting to tackle a problem from my past career and of wanting to explore internet protocols.
+[Pitchy](https://www.getpitchy.com/) is my capstone project for [Ada Developers Academy](http://adadevelopersacademy.org/). It's a social networking site for public relations professionals and journalists. The project was driven by equal parts of wanting to tackle a problem from my past career and of wanting to explore internet protocols.
 
 ##Background
 Before Ada, I worked in crisis communications/public relations. Finding the right journalists to connect with and communicating effectively with them wasn't as easy as it should be. Journalists' inboxes were always full but I knew they wanted my emails because I represented a large tech company. Plus, the email I used for talking to my clients was the same email I used to talking to journalists. Accidentally sending something to journalists that you meant to send to clients is always a fear and does happen. So, I decided to create Pitchy to mediate these issues. 
