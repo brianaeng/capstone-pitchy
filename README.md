@@ -6,7 +6,20 @@
 Before Ada, I worked in crisis communications/public relations. Finding the right journalists to connect with and communicating effectively with them wasn't as easy as it should be. Journalists' inboxes were always full but I knew they wanted my emails because I represented a large tech company. Plus, the email I used for talking to my clients was the same email I used to talking to journalists. Accidentally sending something to journalists that you meant to send to clients is always a fear and does happen. So, I decided to create Pitchy to mediate these issues. 
 
 ## Functionalities
-Users have all the normal "friending" options (request friend, confirm/reject friend request, remove friend), can find new connections via recommendations based on their focus(es), and can message their friends in real-time (uses websockets). 
+Users have all the normal "friending" options (request friend, confirm/reject friend request, remove friend), can find new connections via recommendations based on their focus(es), and can message their friends in real-time (uses websockets).  
+
+Since everything happens behind the login, here are some small clips of a few functionalities.  
+
+#### Messaging
+![](https://media.giphy.com/media/IwpbEVjdFK012/giphy.gif)  
+
+#### Unfriending
+![](https://media.giphy.com/media/CzHqDjcpQnvDG/giphy.gif)  
+
+#### Friending
+![](https://media.giphy.com/media/dnuF1RqvSMPSw/giphy.gif)  
+
+*Feel free to sign up on the site with fake info if you want to check it out further*
 
 ## Tech Stack
 * **Languages** - Python, Javascript
