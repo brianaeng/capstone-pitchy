@@ -22,7 +22,7 @@ Since everything happens behind the login, here are some small clips of a few fu
 *Feel free to sign up on the site with fake info if you want to check it out further*
 
 ## Tech Stack
-* **Languages** - Python, Javascript
+* **Languages** - Python, Javascript, HTML/CSS
 * **Framework** - Django
 * **Libraries** - Django Channels, Django Storages
 * **Databases** - PostgreSQL, Redis (caching layer)
