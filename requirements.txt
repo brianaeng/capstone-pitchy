@@ -50,7 +50,7 @@ semantic-version==2.5.0
 six==1.10.0
 stevedore==1.19.1
 tabulate==0.7.5
-Twisted==19.7.0
+Twisted==20.3.0
 txaio==2.2.1
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
